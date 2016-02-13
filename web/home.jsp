@@ -11,7 +11,7 @@
 
 <html>
     <head>
-        <title>Vortexstring|Tech</title>
+        <title>Vortexstring|ERP</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
         <link rel="stylesheet" type="text/css" href="./codebase/skins/skyblue/dhtmlx.css"/>
