@@ -1,4 +1,4 @@
-<%-- 
+  <%-- 
     Document   : supplierscontroller
     Created on : Dec 4, 2015, 11:34:01 AM
     Author     : TBL
@@ -11,7 +11,7 @@
     function productsToolbarOnclick(itemId, productsGrid,loadPath) {
         switch (itemId) {
             case 'new':
-
+      
                 window.lastvisit = "new";
                 // Grid.clearSelection();
                 rId = -1;
@@ -20,7 +20,6 @@
                 break;
             case 'refresh':
                 productsGrid.clearAll();
-                
                 productsGrid.load(loadPath, 'json');
                 break;
             case 'pdf':
@@ -45,7 +44,7 @@
                     var mydata = "" + JSON.stringify(values);
                     var param = "data=" + mydata + "&actiontype=0";
                     var path = "./services/sv/com/com/crm/products.jsp";
-alert(param);
+
                     winsaver(param, path, "products", productsGrid, true);
                 } else {
                     dhtmlx.message({
@@ -78,6 +77,41 @@ alert(param);
 
             default:
                 setsuppliersSync();
+                break;
+        }
+    }
+    
+    function productsTreeToolbarOnclick(itemId, productsGrid,loadPath,parentId, productsTree,TreeloadPath,productsLayout) {
+        switch (itemId) {
+            case 'new':
+
+                window.lastvisit = "new";
+                // Grid.clearSelection();
+                rId = -1;
+                pname = "Add Products";
+                 productsTreecreateWindow(rId, pname, productsGrid,loadPath,parentId, productsTree,TreeloadPath);
+              
+                break;
+            case 'edit':
+           setTimeout(function () {
+               var rId=productsTree.getSelectedItemId();
+               var pname= productsTree.getItemText(rId);
+    
+               var parentId=0;
+               productsTreecreateWindow(rId, pname, productsGrid,loadPath,parentId, productsTree,TreeloadPath);
+           },100);
+               
+               break; 
+           case 'refresh':
+    
+             productsLayout.cells("a").detachObject(); 
+             var productsTree = attachTree(productsLayout,TreeloadPath);
+                break;
+            case 'pdf':
+                ExportPdf(productsGrid);
+                break;
+            case 'excel':
+                ExportExcel(productsGrid);
                 break;
         }
     }

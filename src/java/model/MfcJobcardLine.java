@@ -1,5 +1,5 @@
 package model;
-// Generated Feb 9, 2016 11:32:40 AM by Hibernate Tools 4.3.1
+// Generated Feb 16, 2016 7:40:44 PM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -57,8 +57,7 @@ public class MfcJobcardLine  implements java.io.Serializable {
     }
 
 	
-    public MfcJobcardLine(MfcJobcard mfcJobcard, int qty, BigDecimal uomQty, BigDecimal dimensionLengthNum, BigDecimal dimensionLengthDenom, BigDecimal dimensionWidthNum, BigDecimal dimensionWidthDenom) {
-        this.mfcJobcard = mfcJobcard;
+    public MfcJobcardLine(int qty, BigDecimal uomQty, BigDecimal dimensionLengthNum, BigDecimal dimensionLengthDenom, BigDecimal dimensionWidthNum, BigDecimal dimensionWidthDenom) {
         this.qty = qty;
         this.uomQty = uomQty;
         this.dimensionLengthNum = dimensionLengthNum;
@@ -207,7 +206,7 @@ public class MfcJobcardLine  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="jobcard_id", nullable=false)
+    @JoinColumn(name="jobcard_id")
     public MfcJobcard getMfcJobcard() {
         return this.mfcJobcard;
     }

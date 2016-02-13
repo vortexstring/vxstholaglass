@@ -45,7 +45,7 @@
                     var mydata = "" + JSON.stringify(values);
                     var param = "data=" + mydata + "&actiontype=0";
                     var path = "./services/sv/com/com/crm/productsale.jsp";
-alert(param);
+                       //alert(param);
                     winsaver(param, path, "productsale", productsaleGrid, true);
                 } else {
                     dhtmlx.message({

@@ -49,7 +49,8 @@
        
      session.setAttribute("companyid",ConAuth.getConProfiles().getConCompany().getCompanyId());
      session.setAttribute("industryid",ConAuth.getConProfiles().getConCompany().getConIndustry().getIndustryId()); 
-     session.setAttribute("profileid",ConAuth.getConProfiles().getProfileId()); 
+    
+      session.setAttribute("profileid",ConAuth.getConProfiles().getProfileId()); 
      session.setAttribute("userid",ConAuth.getConUserByUserId().getUserId()); 
      
      String site = "../home.jsp";

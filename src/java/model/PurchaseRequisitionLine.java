@@ -1,5 +1,5 @@
 package model;
-// Generated Feb 9, 2016 11:32:40 AM by Hibernate Tools 4.3.1
+// Generated Feb 16, 2016 7:40:44 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -45,10 +45,7 @@ public class PurchaseRequisitionLine  implements java.io.Serializable {
     }
 
 	
-    public PurchaseRequisitionLine(ConLife conLife, Item item, PurchaseRequisition purchaseRequisition, String requisitionLineCode, Date requisitionLineDate, int assetId, int qty, String rqlMemo, byte issued) {
-        this.conLife = conLife;
-        this.item = item;
-        this.purchaseRequisition = purchaseRequisition;
+    public PurchaseRequisitionLine(String requisitionLineCode, Date requisitionLineDate, int assetId, int qty, String rqlMemo, byte issued) {
         this.requisitionLineCode = requisitionLineCode;
         this.requisitionLineDate = requisitionLineDate;
         this.assetId = assetId;
@@ -96,7 +93,7 @@ public class PurchaseRequisitionLine  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="life", nullable=false)
+    @JoinColumn(name="life")
     public ConLife getConLife() {
         return this.conLife;
     }
@@ -126,7 +123,7 @@ public class PurchaseRequisitionLine  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="item_id", nullable=false)
+    @JoinColumn(name="item_id")
     public Item getItem() {
         return this.item;
     }
@@ -136,7 +133,7 @@ public class PurchaseRequisitionLine  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="purchaserequisition_id", nullable=false)
+    @JoinColumn(name="purchaserequisition_id")
     public PurchaseRequisition getPurchaseRequisition() {
         return this.purchaseRequisition;
     }

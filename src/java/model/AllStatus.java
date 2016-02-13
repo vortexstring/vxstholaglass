@@ -1,5 +1,5 @@
 package model;
-// Generated Feb 9, 2016 11:32:40 AM by Hibernate Tools 4.3.1
+// Generated Feb 16, 2016 7:40:44 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -51,8 +51,7 @@ public class AllStatus  implements java.io.Serializable {
     }
 
 	
-    public AllStatus(ConLife conLife, String description) {
-        this.conLife = conLife;
+    public AllStatus(String description) {
         this.description = description;
     }
     public AllStatus(ConLife conLife, String description, String statusCategory, Set<FinReceipt> finReceipts, Set<CrmPosLine> crmPosLines, Set<CrmSalesinvoice> crmSalesinvoices, Set<InvAdjustments> invAdjustmentses, Set<CrmQuote> crmQuotes, Set<InvGoodsreceived> invGoodsreceiveds, Set<PrcPurchaseOrder> prcPurchaseOrders, Set<InvGoodsreceivedLine> invGoodsreceivedLines, Set<ConAuth> conAuths, Set<MfcJobcard> mfcJobcards, Set<ConUser> conUsers, Set<ItemConfiguration> itemConfigurations, Set<InvStockcount> invStockcounts, Set<Item> items, Set<CrmDelivery> crmDeliveries, Set<CrmPos> crmPoses, Set<CrmSalesorder> crmSalesorders) {
@@ -91,7 +90,7 @@ public class AllStatus  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="life", nullable=false)
+    @JoinColumn(name="life")
     public ConLife getConLife() {
         return this.conLife;
     }

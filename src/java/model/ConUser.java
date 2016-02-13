@@ -1,5 +1,5 @@
 package model;
-// Generated Feb 9, 2016 11:32:40 AM by Hibernate Tools 4.3.1
+// Generated Feb 16, 2016 7:40:44 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -130,11 +130,11 @@ public class ConUser  implements java.io.Serializable {
      private Set<FinReceiptLine> finReceiptLinesForCreatebyId = new HashSet<FinReceiptLine>(0);
      private Set<FinReceiptLine> finReceiptLinesForWritebyId = new HashSet<FinReceiptLine>(0);
      private Set<CrmSalesorder> crmSalesordersForApprovedby = new HashSet<CrmSalesorder>(0);
-     private Set<ConObjects> conObjectsesForWritebyId = new HashSet<ConObjects>(0);
-     private Set<ConUser> conUsersForCreatebyId = new HashSet<ConUser>(0);
      private Set<ConObjects> conObjectsesForCreatebyId = new HashSet<ConObjects>(0);
+     private Set<ConUser> conUsersForCreatebyId = new HashSet<ConUser>(0);
      private Set<ConUser> conUsersForWritebyId = new HashSet<ConUser>(0);
      private Set<ConProfiles> conProfilesesForWritebyId = new HashSet<ConProfiles>(0);
+     private Set<ConObjects> conObjectsesForWritebyId = new HashSet<ConObjects>(0);
      private Set<ConProfiles> conProfilesesForCreatebyId = new HashSet<ConProfiles>(0);
      private Set<ConIndustry> conIndustriesForCreatebyId = new HashSet<ConIndustry>(0);
      private Set<CrmSalesorder> crmSalesordersForReviewedby = new HashSet<CrmSalesorder>(0);
@@ -174,11 +174,7 @@ public class ConUser  implements java.io.Serializable {
     public ConUser() {
     }
 
-	
-    public ConUser(ConLife conLife) {
-        this.conLife = conLife;
-    }
-    public ConUser(AllStatus allStatus, ConCompany conCompany, ConLife conLife, ConProfiles conProfiles, ConUser conUserByCreatebyId, ConUser conUserByWritebyId, String surname, String otherName, Date createdt, Date writedt, Set<CrmUomCateg> crmUomCategsForCreatebyId, Set<CrmUomCateg> crmUomCategsForWritebyId, Set<ItemLevel> itemLevelsForCreatebyId, Set<ItemLevel> itemLevelsForWritebyId, Set<PurchaseRequisitionLine> purchaseRequisitionLinesForWritebyId, Set<PurchaseRequisitionLine> purchaseRequisitionLinesForCreatebyId, Set<CrmDelivery> crmDeliveriesForApproveby, Set<FinVat> finVatsForWritebyId, Set<FinVat> finVatsForCreatebyId, Set<Issue> issuesForCreatebyId, Set<ItemDimensions> itemDimensionsesForCreatebyId, Set<ItemDimensions> itemDimensionsesForWritebyId, Set<PrcSuppliers> prcSuppliersesForWritebyId, Set<PrcSuppliers> prcSuppliersesForCreatebyId, Set<Issue> issuesForWritebyId, Set<PrcPurchaseOrderLine> prcPurchaseOrderLinesForCreatebyId, Set<Bank> banksForWritebyId, Set<Bank> banksForCreatebyId, Set<BankAccount> bankAccountsForWritebyId, Set<BankAccount> bankAccountsForCreatebyId, Set<CrmQuote> crmQuotesForApprovedby, Set<CrmSalesinvoice> crmSalesinvoicesForApprovedby, Set<CrmSalesinvoice> crmSalesinvoicesForReviewedby, Set<ItemPurchase> itemPurchasesForCreatebyId, Set<InvGoodsreceivedLine> invGoodsreceivedLinesForCreatebyId, Set<InvGoodsreceivedLine> invGoodsreceivedLinesForWritebyId, Set<PrcPurchaseOrderLine> prcPurchaseOrderLinesForWritebyId, Set<InvGoodsreceived> invGoodsreceivedsForCreatebyId, Set<ItemPurchase> itemPurchasesForWritebyId, Set<InvGoodsreceived> invGoodsreceivedsForWritebyId, Set<CrmCustomer> crmCustomersForCreatebyId, Set<CrmCustomer> crmCustomersForWritebyId, Set<ConAuth> conAuthsForUserId, Set<CrmCustomer> crmCustomersForCreatebyId_1, Set<CrmCustomer> crmCustomersForWritebyId_1, Set<CrmCustomer> crmCustomersForCreatebyId_2, Set<CrmDelivery> crmDeliveriesForWritebyId, Set<CrmDelivery> crmDeliveriesForCreatebyId, Set<CrmSalesinvoice> crmSalesinvoicesForWritebyId, Set<CrmCustomer> crmCustomersForWritebyId_2, Set<CrmSalesinvoice> crmSalesinvoicesForCreatebyId, Set<CrmQuote> crmQuotesForReviewedby, Set<CrmQuote> crmQuotesForCreatebyId, Set<CrmQuote> crmQuotesForWritebyId, Set<ConObjectrights> conObjectrightsesForCreatebyId, Set<InvStockcountLine> invStockcountLinesForWritebyId, Set<ItemSale> itemSalesForWritebyId, Set<InvStockcountLine> invStockcountLinesForCreatebyId, Set<ConObjectrights> conObjectrightsesForWritebyId, Set<ItemSale> itemSalesForCreatebyId, Set<MfcJobcardLine> mfcJobcardLinesForWritebyId, Set<MfcJobcardLine> mfcJobcardLinesForCreatebyId, Set<ConNotifications> conNotificationsesForCreatebyId, Set<ConNotifications> conNotificationsesForWritebyId, Set<ConIndustry> conIndustriesForWritebyId, Set<CrmSalesorderLine> crmSalesorderLinesForWritebyId, Set<InvStockcount> invStockcountsForCreatebyId, Set<InvStockcount> invStockcountsForWritebyId, Set<CrmSalesorderLine> crmSalesorderLinesForCreatebyId, Set<ConAuth> conAuthsForCreatebyId, Set<MfcJobcard> mfcJobcardsForApprovedby, Set<CrmCustomer> crmCustomersForWritebyId_3, Set<CrmCustomer> crmCustomersForCreatebyId_3, Set<CrmCustomerCategory> crmCustomerCategoriesForWritebyId, Set<CrmCustomerCategory> crmCustomerCategoriesForCreatebyId, Set<ItemCustomPrices> itemCustomPricesesForWritebyId, Set<ItemCustomPrices> itemCustomPricesesForCreatebyId, Set<ConAuth> conAuthsForWritebyId, Set<ConCompany> conCompaniesForCreatebyId, Set<PrcPurchaseOrder> prcPurchaseOrdersForApprovedby, Set<Branch> branchesForWritebyId, Set<PrcPurchaseOrder> prcPurchaseOrdersForCreatebyId, Set<PrcPurchaseOrder> prcPurchaseOrdersForWritebyId, Set<CrmUom> crmUomsForCreatebyId, Set<CrmUom> crmUomsForWritebyId, Set<Branch> branchesForCreatebyId, Set<Payterm> paytermsForCreatebyId, Set<Payterm> paytermsForWritebyId, Set<CrmSalesorder> crmSalesordersForWritebyId, Set<ItemColour> itemColoursForWritebyId, Set<ItemColour> itemColoursForCreatebyId, Set<ItemColour> itemColoursForCreatebyId_1, Set<CrmSalesorder> crmSalesordersForCreatebyId, Set<ItemColour> itemColoursForWritebyId_1, Set<Item> itemsForCreatebyId, Set<Item> itemsForWritebyId, Set<AllCountry> allCountriesForWritebyId, Set<AllCountry> allCountriesForCreatebyId, Set<FinReceiptLine> finReceiptLinesForCreatebyId, Set<FinReceiptLine> finReceiptLinesForWritebyId, Set<CrmSalesorder> crmSalesordersForApprovedby, Set<ConObjects> conObjectsesForWritebyId, Set<ConUser> conUsersForCreatebyId, Set<ConObjects> conObjectsesForCreatebyId, Set<ConUser> conUsersForWritebyId, Set<ConProfiles> conProfilesesForWritebyId, Set<ConProfiles> conProfilesesForCreatebyId, Set<ConIndustry> conIndustriesForCreatebyId, Set<CrmSalesorder> crmSalesordersForReviewedby, Set<InvStore> invStoresForWritebyId, Set<CrmSalesinvoiceLine> crmSalesinvoiceLinesForWritebyId, Set<PoDtl> poDtlsForWritebyId, Set<InvStore> invStoresForCreatebyId, Set<PoDtl> poDtlsForCreatebyId, Set<CrmQuoteLine> crmQuoteLinesForCreatebyId, Set<MfcJobcard> mfcJobcardsForReviewedby, Set<MfcJobcard> mfcJobcardsForWritebyId, Set<MfcJobcard> mfcJobcardsForCreatebyId, Set<CrmPos> crmPosesForCreatebyId, Set<CrmPos> crmPosesForWritebyId, Set<IssueLine> issueLinesForWritebyId, Set<IssueLine> issueLinesForCreatebyId, Set<FinReceipt> finReceiptsForCreatebyId, Set<InvAdjustments> invAdjustmentsesForWritebyId, Set<ConCompany> conCompaniesForWritebyId, Set<InvAdjustments> invAdjustmentsesForCreatebyId, Set<Paymode> paymodesForCreatebyId, Set<CrmQuoteLine> crmQuoteLinesForWritebyId, Set<Paymode> paymodesForWritebyId, Set<PurchaseRequisition> purchaseRequisitionsForCreatebyId, Set<ConObjectscaption> conObjectscaptionsForCreatebyId, Set<PurchaseRequisition> purchaseRequisitionsForWritebyId, Set<ConObjectscaption> conObjectscaptionsForWritebyId, Set<ItemConfiguration> itemConfigurationsForWritebyId, Set<ItemConfiguration> itemConfigurationsForCreatebyId, Set<CrmDeliveryLine> crmDeliveryLinesForCreatebyId, Set<CrmDeliveryLine> crmDeliveryLinesForWritebyId, Set<CrmPosLine> crmPosLinesForWritebyId, Set<CrmPosLine> crmPosLinesForCreatebyId, Set<CrmSalesinvoiceLine> crmSalesinvoiceLinesForCreatebyId, Set<FinReceipt> finReceiptsForWritebyId) {
+    public ConUser(AllStatus allStatus, ConCompany conCompany, ConLife conLife, ConProfiles conProfiles, ConUser conUserByCreatebyId, ConUser conUserByWritebyId, String surname, String otherName, Date createdt, Date writedt, Set<CrmUomCateg> crmUomCategsForCreatebyId, Set<CrmUomCateg> crmUomCategsForWritebyId, Set<ItemLevel> itemLevelsForCreatebyId, Set<ItemLevel> itemLevelsForWritebyId, Set<PurchaseRequisitionLine> purchaseRequisitionLinesForWritebyId, Set<PurchaseRequisitionLine> purchaseRequisitionLinesForCreatebyId, Set<CrmDelivery> crmDeliveriesForApproveby, Set<FinVat> finVatsForWritebyId, Set<FinVat> finVatsForCreatebyId, Set<Issue> issuesForCreatebyId, Set<ItemDimensions> itemDimensionsesForCreatebyId, Set<ItemDimensions> itemDimensionsesForWritebyId, Set<PrcSuppliers> prcSuppliersesForWritebyId, Set<PrcSuppliers> prcSuppliersesForCreatebyId, Set<Issue> issuesForWritebyId, Set<PrcPurchaseOrderLine> prcPurchaseOrderLinesForCreatebyId, Set<Bank> banksForWritebyId, Set<Bank> banksForCreatebyId, Set<BankAccount> bankAccountsForWritebyId, Set<BankAccount> bankAccountsForCreatebyId, Set<CrmQuote> crmQuotesForApprovedby, Set<CrmSalesinvoice> crmSalesinvoicesForApprovedby, Set<CrmSalesinvoice> crmSalesinvoicesForReviewedby, Set<ItemPurchase> itemPurchasesForCreatebyId, Set<InvGoodsreceivedLine> invGoodsreceivedLinesForCreatebyId, Set<InvGoodsreceivedLine> invGoodsreceivedLinesForWritebyId, Set<PrcPurchaseOrderLine> prcPurchaseOrderLinesForWritebyId, Set<InvGoodsreceived> invGoodsreceivedsForCreatebyId, Set<ItemPurchase> itemPurchasesForWritebyId, Set<InvGoodsreceived> invGoodsreceivedsForWritebyId, Set<CrmCustomer> crmCustomersForCreatebyId, Set<CrmCustomer> crmCustomersForWritebyId, Set<ConAuth> conAuthsForUserId, Set<CrmCustomer> crmCustomersForCreatebyId_1, Set<CrmCustomer> crmCustomersForWritebyId_1, Set<CrmCustomer> crmCustomersForCreatebyId_2, Set<CrmDelivery> crmDeliveriesForWritebyId, Set<CrmDelivery> crmDeliveriesForCreatebyId, Set<CrmSalesinvoice> crmSalesinvoicesForWritebyId, Set<CrmCustomer> crmCustomersForWritebyId_2, Set<CrmSalesinvoice> crmSalesinvoicesForCreatebyId, Set<CrmQuote> crmQuotesForReviewedby, Set<CrmQuote> crmQuotesForCreatebyId, Set<CrmQuote> crmQuotesForWritebyId, Set<ConObjectrights> conObjectrightsesForCreatebyId, Set<InvStockcountLine> invStockcountLinesForWritebyId, Set<ItemSale> itemSalesForWritebyId, Set<InvStockcountLine> invStockcountLinesForCreatebyId, Set<ConObjectrights> conObjectrightsesForWritebyId, Set<ItemSale> itemSalesForCreatebyId, Set<MfcJobcardLine> mfcJobcardLinesForWritebyId, Set<MfcJobcardLine> mfcJobcardLinesForCreatebyId, Set<ConNotifications> conNotificationsesForCreatebyId, Set<ConNotifications> conNotificationsesForWritebyId, Set<ConIndustry> conIndustriesForWritebyId, Set<CrmSalesorderLine> crmSalesorderLinesForWritebyId, Set<InvStockcount> invStockcountsForCreatebyId, Set<InvStockcount> invStockcountsForWritebyId, Set<CrmSalesorderLine> crmSalesorderLinesForCreatebyId, Set<ConAuth> conAuthsForCreatebyId, Set<MfcJobcard> mfcJobcardsForApprovedby, Set<CrmCustomer> crmCustomersForWritebyId_3, Set<CrmCustomer> crmCustomersForCreatebyId_3, Set<CrmCustomerCategory> crmCustomerCategoriesForWritebyId, Set<CrmCustomerCategory> crmCustomerCategoriesForCreatebyId, Set<ItemCustomPrices> itemCustomPricesesForWritebyId, Set<ItemCustomPrices> itemCustomPricesesForCreatebyId, Set<ConAuth> conAuthsForWritebyId, Set<ConCompany> conCompaniesForCreatebyId, Set<PrcPurchaseOrder> prcPurchaseOrdersForApprovedby, Set<Branch> branchesForWritebyId, Set<PrcPurchaseOrder> prcPurchaseOrdersForCreatebyId, Set<PrcPurchaseOrder> prcPurchaseOrdersForWritebyId, Set<CrmUom> crmUomsForCreatebyId, Set<CrmUom> crmUomsForWritebyId, Set<Branch> branchesForCreatebyId, Set<Payterm> paytermsForCreatebyId, Set<Payterm> paytermsForWritebyId, Set<CrmSalesorder> crmSalesordersForWritebyId, Set<ItemColour> itemColoursForWritebyId, Set<ItemColour> itemColoursForCreatebyId, Set<ItemColour> itemColoursForCreatebyId_1, Set<CrmSalesorder> crmSalesordersForCreatebyId, Set<ItemColour> itemColoursForWritebyId_1, Set<Item> itemsForCreatebyId, Set<Item> itemsForWritebyId, Set<AllCountry> allCountriesForWritebyId, Set<AllCountry> allCountriesForCreatebyId, Set<FinReceiptLine> finReceiptLinesForCreatebyId, Set<FinReceiptLine> finReceiptLinesForWritebyId, Set<CrmSalesorder> crmSalesordersForApprovedby, Set<ConObjects> conObjectsesForCreatebyId, Set<ConUser> conUsersForCreatebyId, Set<ConUser> conUsersForWritebyId, Set<ConProfiles> conProfilesesForWritebyId, Set<ConObjects> conObjectsesForWritebyId, Set<ConProfiles> conProfilesesForCreatebyId, Set<ConIndustry> conIndustriesForCreatebyId, Set<CrmSalesorder> crmSalesordersForReviewedby, Set<InvStore> invStoresForWritebyId, Set<CrmSalesinvoiceLine> crmSalesinvoiceLinesForWritebyId, Set<PoDtl> poDtlsForWritebyId, Set<InvStore> invStoresForCreatebyId, Set<PoDtl> poDtlsForCreatebyId, Set<CrmQuoteLine> crmQuoteLinesForCreatebyId, Set<MfcJobcard> mfcJobcardsForReviewedby, Set<MfcJobcard> mfcJobcardsForWritebyId, Set<MfcJobcard> mfcJobcardsForCreatebyId, Set<CrmPos> crmPosesForCreatebyId, Set<CrmPos> crmPosesForWritebyId, Set<IssueLine> issueLinesForWritebyId, Set<IssueLine> issueLinesForCreatebyId, Set<FinReceipt> finReceiptsForCreatebyId, Set<InvAdjustments> invAdjustmentsesForWritebyId, Set<ConCompany> conCompaniesForWritebyId, Set<InvAdjustments> invAdjustmentsesForCreatebyId, Set<Paymode> paymodesForCreatebyId, Set<CrmQuoteLine> crmQuoteLinesForWritebyId, Set<Paymode> paymodesForWritebyId, Set<PurchaseRequisition> purchaseRequisitionsForCreatebyId, Set<ConObjectscaption> conObjectscaptionsForCreatebyId, Set<PurchaseRequisition> purchaseRequisitionsForWritebyId, Set<ConObjectscaption> conObjectscaptionsForWritebyId, Set<ItemConfiguration> itemConfigurationsForWritebyId, Set<ItemConfiguration> itemConfigurationsForCreatebyId, Set<CrmDeliveryLine> crmDeliveryLinesForCreatebyId, Set<CrmDeliveryLine> crmDeliveryLinesForWritebyId, Set<CrmPosLine> crmPosLinesForWritebyId, Set<CrmPosLine> crmPosLinesForCreatebyId, Set<CrmSalesinvoiceLine> crmSalesinvoiceLinesForCreatebyId, Set<FinReceipt> finReceiptsForWritebyId) {
        this.allStatus = allStatus;
        this.conCompany = conCompany;
        this.conLife = conLife;
@@ -280,11 +276,11 @@ public class ConUser  implements java.io.Serializable {
        this.finReceiptLinesForCreatebyId = finReceiptLinesForCreatebyId;
        this.finReceiptLinesForWritebyId = finReceiptLinesForWritebyId;
        this.crmSalesordersForApprovedby = crmSalesordersForApprovedby;
-       this.conObjectsesForWritebyId = conObjectsesForWritebyId;
-       this.conUsersForCreatebyId = conUsersForCreatebyId;
        this.conObjectsesForCreatebyId = conObjectsesForCreatebyId;
+       this.conUsersForCreatebyId = conUsersForCreatebyId;
        this.conUsersForWritebyId = conUsersForWritebyId;
        this.conProfilesesForWritebyId = conProfilesesForWritebyId;
+       this.conObjectsesForWritebyId = conObjectsesForWritebyId;
        this.conProfilesesForCreatebyId = conProfilesesForCreatebyId;
        this.conIndustriesForCreatebyId = conIndustriesForCreatebyId;
        this.crmSalesordersForReviewedby = crmSalesordersForReviewedby;
@@ -355,7 +351,7 @@ public class ConUser  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="life", nullable=false)
+    @JoinColumn(name="life")
     public ConLife getConLife() {
         return this.conLife;
     }
@@ -1253,13 +1249,13 @@ public class ConUser  implements java.io.Serializable {
         this.crmSalesordersForApprovedby = crmSalesordersForApprovedby;
     }
 
-@OneToMany(fetch=FetchType.LAZY, mappedBy="conUserByWritebyId")
-    public Set<ConObjects> getConObjectsesForWritebyId() {
-        return this.conObjectsesForWritebyId;
+@OneToMany(fetch=FetchType.LAZY, mappedBy="conUserByCreatebyId")
+    public Set<ConObjects> getConObjectsesForCreatebyId() {
+        return this.conObjectsesForCreatebyId;
     }
     
-    public void setConObjectsesForWritebyId(Set<ConObjects> conObjectsesForWritebyId) {
-        this.conObjectsesForWritebyId = conObjectsesForWritebyId;
+    public void setConObjectsesForCreatebyId(Set<ConObjects> conObjectsesForCreatebyId) {
+        this.conObjectsesForCreatebyId = conObjectsesForCreatebyId;
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="conUserByCreatebyId")
@@ -1269,15 +1265,6 @@ public class ConUser  implements java.io.Serializable {
     
     public void setConUsersForCreatebyId(Set<ConUser> conUsersForCreatebyId) {
         this.conUsersForCreatebyId = conUsersForCreatebyId;
-    }
-
-@OneToMany(fetch=FetchType.LAZY, mappedBy="conUserByCreatebyId")
-    public Set<ConObjects> getConObjectsesForCreatebyId() {
-        return this.conObjectsesForCreatebyId;
-    }
-    
-    public void setConObjectsesForCreatebyId(Set<ConObjects> conObjectsesForCreatebyId) {
-        this.conObjectsesForCreatebyId = conObjectsesForCreatebyId;
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="conUserByWritebyId")
@@ -1296,6 +1283,15 @@ public class ConUser  implements java.io.Serializable {
     
     public void setConProfilesesForWritebyId(Set<ConProfiles> conProfilesesForWritebyId) {
         this.conProfilesesForWritebyId = conProfilesesForWritebyId;
+    }
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="conUserByWritebyId")
+    public Set<ConObjects> getConObjectsesForWritebyId() {
+        return this.conObjectsesForWritebyId;
+    }
+    
+    public void setConObjectsesForWritebyId(Set<ConObjects> conObjectsesForWritebyId) {
+        this.conObjectsesForWritebyId = conObjectsesForWritebyId;
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="conUserByCreatebyId")

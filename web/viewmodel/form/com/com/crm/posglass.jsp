@@ -25,7 +25,7 @@
     /**
      * ********Form specific fields***********
      */
-    String qdate, memo, ralno,strunitsid;
+    String qdate, memo, ralno,strunitsid,productid,stritemid;
     Integer posid,unitsid, itemid, itemserviceid, itemsaleid, qty, uomid, dimensionuomid, status,vatid;
     BigDecimal vatrate,price, discount, interest, percentdisc, percentint, amount, vatableamount, vatamount, uomqty, dimensionlength, dimensionwidth, dimensionthickness, dimensionthicknessnum, dimensionthicknessdenom, dimensionlengthnum, dimensionlengthdenom, dimensionwidthnum, dimensionwidthdenom;
 %>
@@ -37,10 +37,12 @@
     strprofileid = session.getAttribute("profileid").toString();
     struserid = session.getAttribute("userid").toString();
     strid = request.getParameter("id");
-    strunitsid = request.getParameter("itemsaleunitsid");
+    strunitsid = request.getParameter("itemsaleunitsid").toString();
+    stritemid = request.getParameter("productid").toString();
 
     queryFilter = "";
     id = Integer.valueOf(strid);
+    itemid= Integer.valueOf(stritemid);
     unitsid = Integer.valueOf(strunitsid);
     CMuserid = Integer.valueOf(struserid);
     CMprofileid = Integer.valueOf(strprofileid);
@@ -131,10 +133,8 @@
         vatrate= new BigDecimal("0");
         ralno = "";
         posid = 0;
-        itemid = 0;
-         vatid = 0;
-
-        itemserviceid = 0;
+        vatid = 0;
+       itemserviceid = 0;
         itemsaleid = 0;
         status = 3;
         uomid = 0;
@@ -163,40 +163,40 @@
 {type: "combo", name:"dimensionuomid",label: "Dimensionuomid", filtering:true , required:"true", options:[<% out.print(CHdimensionuomid.LoadCombo("uom", queryFilter, dimensionuomid)); %>]} ,
 
 {type: "fieldset", name: "length", label: "Length", inputWidth: "auto", list:[
-{type: "input", name:"dimensionlength",label:"Dimensionlength", value:"<% out.print(dimensionlength); %>" , validate:"ValidateLength"},
-{type: "input", name:"dimensionlengthnum",label:"Dimensionlengthnum", value:"<% out.print(dimensionlengthnum); %>" , validate:"ValidateLength"},
-{type: "input", name:"dimensionlengthdenom",label:"Dimensionlengthdenom", value:"<% out.print(dimensionlengthdenom); %>" , validate:"ValidateLength"}
+{type: "input", name:"dimensionlength",label:"Dimension length", value:"<% out.print(dimensionlength); %>" , validate:"ValidateLength"},
+{type: "input", name:"dimensionlengthnum",label:"Dimension length num", value:"<% out.print(dimensionlengthnum); %>" , validate:"ValidateLength"},
+{type: "input", name:"dimensionlengthdenom",label:"Dimension length denom", value:"<% out.print(dimensionlengthdenom); %>" , validate:"ValidateLength"}
 ]},
-{type: "combo", name:"uomid",label: "Sale UOM", filtering:true , required:"true", options:[<% out.print(CHdimensionuomid.LoadCombo("uom", queryFilter, unitsid)); %>]} ,
+{type: "combo", name:"uomid",label: "Sale UOM", filtering:true ,disabled:true, required:"true", options:[<% out.print(CHdimensionuomid.LoadCombo("uom", queryFilter, unitsid)); %>]} ,
 {type: "input", name:"percentdisc",label:"Discount (%)", value:"<% out.print(percentdisc); %>" , validate:"ValidateLength"},
 {type: "input", name:"discount",label:"Discount Amount", disabled:true, value:"<% out.print(discount); %>" , validate:"ValidateLength"},
 {type: "combo", name:"vatid",label: "Sale VAT", filtering:true , required:"true",disabled:true, options:[<% out.print(CHvatid.LoadCombo("vatid", queryFilter, vatid)); %>]} ,
 
 {type: "newcolumn"},
-{type: "input", name:"qty",label:"Qty", value:"<% out.print(qty); %>" , validate:"ValidateLength"},
+{type: "input", name:"qty",label:"Pieces", value:"<% out.print(qty); %>" , validate:"ValidateLength"},
 {type: "fieldset", name: "width", label: "Width", inputWidth: "auto", list:[
-{type: "input", name:"dimensionwidth",label:"Dimensionwidth", value:"<% out.print(dimensionwidth); %>" , validate:"ValidateLength"},
-{type: "input", name:"dimensionwidthnum",label:"Dimensionwidthnum", value:"<% out.print(dimensionwidthnum); %>" , validate:"ValidateLength"},
-{type: "input", name:"dimensionwidthdenom",label:"Dimensionwidthdenom", value:"<% out.print(dimensionwidthdenom); %>" , validate:"ValidateLength"},
+{type: "input", name:"dimensionwidth",label:"Dimension width", value:"<% out.print(dimensionwidth); %>" , validate:"ValidateLength"},
+{type: "input", name:"dimensionwidthnum",label:"Dimension width num", value:"<% out.print(dimensionwidthnum); %>" , validate:"ValidateLength"},
+{type: "input", name:"dimensionwidthdenom",label:"Dimension width denom", value:"<% out.print(dimensionwidthdenom); %>" , validate:"ValidateLength"},
 ]},
 
-{type: "combo", name:"itemsaleid",label: "Price ", filtering:true , required:"true", disabled:true, options:[<% out.print(CHdimensionuomid.LoadCombo("itemsaleid", "WHERE crmUom.uomId=4", itemsaleid)); %>]} ,
+{type: "combo", name:"itemsaleid",label: "Price ", filtering:true , required:"true", disabled:true, options:[<% out.print(CHdimensionuomid.LoadCombo("itemsaleid", "WHERE crmUom.uomId="+unitsid+" or itemSaleId=0" , itemsaleid)); %>]} ,
 {type: "input", name:"percentint",label:"Interest (%)", value:"<% out.print(percentint); %>" ,validate:"ValidateLength"},
 {type: "input", name:"interest",label:"Interest Amount", disabled:true, value:"<% out.print(interest); %>" , validate:"ValidateLength"},
-{type: "input", name:"vatrate",label:"vatrate", value:"<% out.print(vatrate); %>" , validate:"ValidateLength"},
+{type: "input", name:"vatrate",label:"Vatrate (%)", value:"<% out.print(vatrate); %>" , validate:"ValidateLength"},
 ]},
 
 {type: "fieldset", name: "salesDetails", label: "Sales Details", inputWidth: "auto", list:[
 
 {type: "input", name:"amount",label:"Amount",  value:"<% out.print(amount); %>" ,readonly:"true", validate:"ValidateLength"},
-{type: "input", name:"vatamount",label:"Vatamount", value:"<% out.print(vatamount); %>" ,readonly:"true", validate:"ValidateLength"},
-{type: "calendar",name:"qdate" ,enableTime:true ,dateFormat:"%d-%m-%Y %H:%i:%s", serverDateFormat: "%Y-%m-%d %H:%i:%s" ,label: "Qdate",readonly:"true", value:"<% out.print(qdate); %>"},
+{type: "input", name:"vatamount",label:"Vat amount", value:"<% out.print(vatamount); %>" ,readonly:"true", validate:"ValidateLength"},
+{type: "calendar",name:"qdate" ,enableTime:true ,dateFormat:"%d-%m-%Y %H:%i:%s", serverDateFormat: "%Y-%m-%d %H:%i:%s" ,label: "Transaction date",readonly:"true", value:"<% out.print(qdate); %>"},
 {type: "newcolumn"},
 
-{type: "combo", name:"status",label: "Status", filtering:true , options:[<% out.print(CHstatus.LoadCombo("statusid", queryFilter, status)); %>]} ,
+{type: "combo", name:"status",label: "Status",disabled:true, filtering:true , options:[<% out.print(CHstatus.LoadCombo("statusid", queryFilter, status)); %>]} ,
 
-{type: "input", name:"vatableamount",label:"Vatableamount", value:"<% out.print(vatableamount); %>" ,readonly:"true", validate:"ValidateLength"},
-{type: "input", name:"uomqty",label:"Uomqty", value:"<% out.print(uomqty); %>" ,readonly:"true", validate:"ValidateLength"},
+{type: "input", name:"vatableamount",label:"Vatable amount", value:"<% out.print(vatableamount); %>" ,readonly:"true", validate:"ValidateLength"},
+{type: "input", name:"uomqty",label:"UOM qty", value:"<% out.print(uomqty); %>" ,readonly:"true", validate:"ValidateLength"},
 {type: "input", name:"memo",label:"Memo", value: "<% out.print(memo); %>",rows:3 , validate:"ValidateLength"},
 ]},
 

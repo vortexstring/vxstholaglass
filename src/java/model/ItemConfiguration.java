@@ -1,5 +1,5 @@
 package model;
-// Generated Feb 9, 2016 11:32:40 AM by Hibernate Tools 4.3.1
+// Generated Feb 16, 2016 7:40:44 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -49,8 +49,7 @@ public class ItemConfiguration  implements java.io.Serializable {
     }
 
 	
-    public ItemConfiguration(ConLife conLife, boolean hasColour, boolean isPurchased, boolean isProduction, boolean isSold, boolean hasDimensions, boolean hasProductionTemplate) {
-        this.conLife = conLife;
+    public ItemConfiguration(boolean hasColour, boolean isPurchased, boolean isProduction, boolean isSold, boolean hasDimensions, boolean hasProductionTemplate) {
         this.hasColour = hasColour;
         this.isPurchased = isPurchased;
         this.isProduction = isProduction;
@@ -109,7 +108,7 @@ public class ItemConfiguration  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="life", nullable=false)
+    @JoinColumn(name="life")
     public ConLife getConLife() {
         return this.conLife;
     }

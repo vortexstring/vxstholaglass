@@ -115,7 +115,6 @@
               
                 var credentialsForm = credentialsLayout.cells("b").attachForm();
                 setRights("credentials", credentialsForm,credentialsToolbar)
-               // alert("./viewmodel/form/com/com/sec/credentials.jsp?id="+rId);
                 credentialsLayout.cells("b").progressOn();
                 credentialsForm.loadStruct("./viewmodel/form/com/com/sec/credentials.jsp?id="+rId, function () {
                     credentialsLayout.cells("b").progressOff();

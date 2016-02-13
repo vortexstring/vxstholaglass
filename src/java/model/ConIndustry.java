@@ -1,5 +1,5 @@
 package model;
-// Generated Feb 9, 2016 11:32:40 AM by Hibernate Tools 4.3.1
+// Generated Feb 16, 2016 7:40:44 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -44,8 +44,7 @@ public class ConIndustry  implements java.io.Serializable {
     }
 
 	
-    public ConIndustry(ConLife conLife, String industry) {
-        this.conLife = conLife;
+    public ConIndustry(String industry) {
         this.industry = industry;
     }
     public ConIndustry(ConCompany conCompany, ConLife conLife, ConUser conUserByWritebyId, ConUser conUserByCreatebyId, String industry, String industryCode, Date createdt, Date writedt, Set<ConCompany> conCompanies, Set<ConObjectscaption> conObjectscaptions) {
@@ -84,7 +83,7 @@ public class ConIndustry  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="life", nullable=false)
+    @JoinColumn(name="life")
     public ConLife getConLife() {
         return this.conLife;
     }

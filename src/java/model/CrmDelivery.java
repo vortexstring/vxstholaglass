@@ -1,5 +1,5 @@
 package model;
-// Generated Feb 9, 2016 11:32:40 AM by Hibernate Tools 4.3.1
+// Generated Feb 16, 2016 7:40:44 PM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -53,9 +53,7 @@ public class CrmDelivery  implements java.io.Serializable {
     }
 
 	
-    public CrmDelivery(ConLife conLife, CrmSalesorder crmSalesorder, boolean closed) {
-        this.conLife = conLife;
-        this.crmSalesorder = crmSalesorder;
+    public CrmDelivery(boolean closed) {
         this.closed = closed;
     }
     public CrmDelivery(AllStatus allStatus, ConCompany conCompany, ConLife conLife, ConUser conUserByApproveby, ConUser conUserByWritebyId, ConUser conUserByCreatebyId, CrmCustomer crmCustomer, CrmSalesorder crmSalesorder, String deliveryCode, Date deliveryDate, BigDecimal amount, String ref, String comment, Date approvedate, boolean closed, Date createdt, Date writedt, Set<CrmDeliveryLine> crmDeliveryLines) {
@@ -112,7 +110,7 @@ public class CrmDelivery  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="life", nullable=false)
+    @JoinColumn(name="life")
     public ConLife getConLife() {
         return this.conLife;
     }
@@ -162,7 +160,7 @@ public class CrmDelivery  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="salesorder_id", nullable=false)
+    @JoinColumn(name="salesorder_id")
     public CrmSalesorder getCrmSalesorder() {
         return this.crmSalesorder;
     }

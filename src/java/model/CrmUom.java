@@ -1,5 +1,5 @@
 package model;
-// Generated Feb 9, 2016 11:32:40 AM by Hibernate Tools 4.3.1
+// Generated Feb 16, 2016 7:40:44 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -61,10 +61,6 @@ public class CrmUom  implements java.io.Serializable {
     public CrmUom() {
     }
 
-	
-    public CrmUom(ConCompany conCompany) {
-        this.conCompany = conCompany;
-    }
     public CrmUom(ConCompany conCompany, ConLife conLife, ConUser conUserByCreatebyId, ConUser conUserByWritebyId, CrmUomCateg crmUomCateg, String uomName, Date createdt, Date writedt, Set<CrmSalesinvoiceLine> crmSalesinvoiceLinesForUomId, Set<InvAdjustments> invAdjustmentses, Set<CrmSalesinvoiceLine> crmSalesinvoiceLinesForDimensionUomId, Set<ItemPurchase> itemPurchases, Set<PrcPurchaseOrderLine> prcPurchaseOrderLines, Set<CrmQuoteLine> crmQuoteLinesForDimensionUomId, Set<CrmQuoteLine> crmQuoteLinesForUomId, Set<InvGoodsreceivedLine> invGoodsreceivedLinesForPurchaseuomId, Set<InvGoodsreceivedLine> invGoodsreceivedLinesForReceiveduomId, Set<PoDtl> poDtls, Set<ItemDimensions> itemDimensionses, Set<ItemSale> itemSales, Set<CrmDeliveryLine> crmDeliveryLinesForDimensionUomId, Set<CrmSalesorderLine> crmSalesorderLinesForUomId, Set<CrmSalesorderLine> crmSalesorderLinesForDimensionUomId, Set<CrmDeliveryLine> crmDeliveryLinesForUomId, Set<CrmPosLine> crmPosLinesForUomId, Set<MfcJobcardLine> mfcJobcardLinesForUomId, Set<MfcJobcardLine> mfcJobcardLinesForDimensionUomId, Set<CrmPosLine> crmPosLinesForDimensionUomId) {
        this.conCompany = conCompany;
        this.conLife = conLife;
@@ -109,7 +105,7 @@ public class CrmUom  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="company_id", nullable=false)
+    @JoinColumn(name="company_id")
     public ConCompany getConCompany() {
         return this.conCompany;
     }

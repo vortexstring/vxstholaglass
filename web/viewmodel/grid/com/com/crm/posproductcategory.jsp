@@ -14,16 +14,16 @@
 <%!
     String myq, productsCount,productClass;
     List mydata;
-    Integer i;
+    Integer i,pc;
 %>
 
 <%
- productClass=request.getParameter("productClass");
-   // pc=Integer.parseInt(productClass);
+ productClass=request.getParameter("productClassId");
+     pc=Integer.parseInt(productClass);
      EmptyGridVH  EGVH=new EmptyGridVH();
 
     DataLoader ME = new DataLoader();
-    StringBuilder myquery = new StringBuilder("FROM Item where item_level_id=2 ");
+    StringBuilder myquery = new StringBuilder("FROM Item where item_level_id=2 and item.itemId="+pc);
 
     mydata = ME.getData(myquery.toString());
 

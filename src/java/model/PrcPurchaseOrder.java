@@ -1,5 +1,5 @@
 package model;
-// Generated Feb 9, 2016 11:32:40 AM by Hibernate Tools 4.3.1
+// Generated Feb 16, 2016 7:40:44 PM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -57,10 +57,6 @@ public class PrcPurchaseOrder  implements java.io.Serializable {
     public PrcPurchaseOrder() {
     }
 
-	
-    public PrcPurchaseOrder(ConLife conLife) {
-        this.conLife = conLife;
-    }
     public PrcPurchaseOrder(AllStatus allStatus, ConCompany conCompany, ConLife conLife, ConUser conUserByApprovedby, ConUser conUserByCreatebyId, ConUser conUserByWritebyId, PrcSuppliers prcSuppliers, String purchaseorderCode, Date purchaseorderDate, Date purchaseorderDuedate, String ref, BigDecimal tax, BigDecimal amount, Boolean direct, String comment, Integer seq, Boolean invoiced, Date approvedate, Date createdt, Date writedt, Set<InvGoodsreceived> invGoodsreceiveds, Set<PoDtl> poDtls, Set<PrcPurchaseOrderLine> prcPurchaseOrderLines) {
        this.allStatus = allStatus;
        this.conCompany = conCompany;
@@ -120,7 +116,7 @@ public class PrcPurchaseOrder  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="life", nullable=false)
+    @JoinColumn(name="life")
     public ConLife getConLife() {
         return this.conLife;
     }

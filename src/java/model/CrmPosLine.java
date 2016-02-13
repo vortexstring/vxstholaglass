@@ -1,5 +1,5 @@
 package model;
-// Generated Feb 9, 2016 11:32:40 AM by Hibernate Tools 4.3.1
+// Generated Feb 16, 2016 7:40:44 PM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -66,10 +66,6 @@ public class CrmPosLine  implements java.io.Serializable {
     public CrmPosLine() {
     }
 
-	
-    public CrmPosLine(ConCompany conCompany) {
-        this.conCompany = conCompany;
-    }
     public CrmPosLine(AllStatus allStatus, ConCompany conCompany, ConLife conLife, ConUser conUserByWritebyId, ConUser conUserByCreatebyId, CrmPos crmPos, CrmUom crmUomByUomId, CrmUom crmUomByDimensionUomId, Item itemByItemServiceId, Item itemByItemId, ItemSale itemSale, BigDecimal price, Integer qty, BigDecimal discount, BigDecimal interest, BigDecimal percentDisc, BigDecimal percentInt, BigDecimal amount, BigDecimal vatableAmount, BigDecimal vatAmount, BigDecimal uomQty, Date qdate, String memo, BigDecimal dimensionLength, BigDecimal dimensionWidth, BigDecimal dimensionThickness, BigDecimal dimensionThicknessNum, BigDecimal dimensionThicknessDenom, BigDecimal dimensionLengthNum, BigDecimal dimensionLengthDenom, BigDecimal dimensionWidthNum, BigDecimal dimensionWidthDenom, String ralNo, Date createdt, Date writedt) {
        this.allStatus = allStatus;
        this.conCompany = conCompany;
@@ -131,7 +127,7 @@ public class CrmPosLine  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="company_id", nullable=false)
+    @JoinColumn(name="company_id")
     public ConCompany getConCompany() {
         return this.conCompany;
     }

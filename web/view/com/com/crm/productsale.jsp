@@ -80,39 +80,39 @@
             /***************END OF OBJECT PROPERTIES**************************************/
 
             /* D *************************OBJECTS EVENTS***********************************/
-            var loadPath = 'viewmodel/grid/com/com/crm/productsale.jsp?id='+itemid;
+            var productsaleloadpath = 'viewmodel/grid/com/com/crm/productsale.jsp?id='+itemid;
             productsaleToolbar.attachEvent("onXLE", function () {
                 window.lastvisit = 'new';
             });
             productsaleToolbar.attachEvent("onClick", function (itemId) {
            
-               productsaleToolbarOnclick(itemId, productsaleGrid, loadPath,itemid);
+               productsaleToolbarOnclick(itemId, productsaleGrid, productsaleloadpath,itemid);
             });
             productsaleGrid.attachEvent("onXLS", function () {
                 productsaleLayout.cells("a").progressOn();
             });
-            productsaleGrid.load(loadPath, 'json');
+            productsaleGrid.load(productsaleloadpath, 'json');
             productsaleGrid.attachEvent("onXLE", function () {
                 productsaleLayout.cells("a").progressOff();
             });
             rId = -1;
             productsaleGrid.attachEvent("onRowSelect", function (rId, cInd) {
-            productsaleGridOnselect(productsaleGrid, rId, loadPath,itemid);
+            productsaleGridOnselect(productsaleGrid, rId, productsaleloadpath,itemid);
 
             });
-            function productsaleGridOnselect(productsaleGrid, rId, loadPath,itemid) {
+            function productsaleGridOnselect(productsaleGrid, rId, productsaleloadpath,itemid) {
                 var pname = productsaleGrid.cells(rId, 1).getValue();
-                productsalecreateWindow(rId, pname, productsaleGrid, loadPath,itemid);
+                productsalecreateWindow(rId, pname, productsaleGrid, productsaleloadpath,itemid);
 
             }
             /**************************END OF OBJECTS EVENTS********************************/
-            function  productsalecreateWindow(rId, pname, productsaleGrid, loadPath,itemid) {
+            function  productsalecreateWindow(rId, pname, productsaleGrid, productsaleloadpath,itemid) {
        
                 var win = dhxWins.createWindow("Customers " + rId, 370, 70, 800, 585);
                 win.attachEvent("onClose", function (win) {
                     win.hide();
                    // customersGrid.clearAll();
-                   // customersGrid.load(loadPath, 'json');
+                   // customersGrid.load(productsaleloadpath, 'json');
 
                 });
                 win.setText("<b>" + pname + "</b>");
@@ -135,7 +135,7 @@
                 productsaleFormLayout.cells("a").progressOn();
                 
                 
-                alert("./viewmodel/form/com/com/crm/productsale.jsp?id=" + rId+"&itemid="+itemid);
+              //  alert("./viewmodel/form/com/com/crm/productsale.jsp?id=" + rId+"&itemid="+itemid);
                 productsaleForm.loadStruct("./viewmodel/form/com/com/crm/productsale.jsp?id=" + rId+"&itemid="+itemid, function () {
 
                     productsaleFormLayout.cells("a").progressOff();

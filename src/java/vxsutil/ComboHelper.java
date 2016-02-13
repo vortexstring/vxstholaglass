@@ -27,8 +27,8 @@ public class ComboHelper {
 
     boolean isclosed;
     public String LoadCombo(String param,String datafilter,Integer selected) {
-         combodata="{value:\"\" , text: \"\"},";
-         
+        // combodata="{value:\"\" , text: \"\"},";
+         combodata="";
         if(param.equals("profile")) {
             
                 StringBuilder profilesquery = new StringBuilder("FROM ConProfiles");
@@ -469,7 +469,7 @@ Item DC = (Item) iterator.next();
 if(selected.equals(0)){ if(DC.getConLife().getLifeId().equals(defaultLife)){ selectedoption=selectstmt.toString();}else{selectedoption="";}}else{
 if(DC.getItemId()==selected){selectedoption=selectstmt.toString();}else{selectedoption="";}}
 
-combodata = combodata + "{value: \"" + DC.getItemId()+ "\", text: \"" + DC.getItemCode()+ " " + DC.getItemName()+ "\""+selectedoption+"},";
+combodata = combodata + "{value: \"" + DC.getItemId()+ "\", text: \"" + DC.getItemName()+ "-" + DC.getItemCode()+ "\""+selectedoption+"},";
 }
 }
 else

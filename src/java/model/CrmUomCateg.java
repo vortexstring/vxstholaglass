@@ -1,5 +1,5 @@
 package model;
-// Generated Feb 9, 2016 11:32:40 AM by Hibernate Tools 4.3.1
+// Generated Feb 16, 2016 7:40:44 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -42,8 +42,7 @@ public class CrmUomCateg  implements java.io.Serializable {
     }
 
 	
-    public CrmUomCateg(ConCompany conCompany, String uomCategName) {
-        this.conCompany = conCompany;
+    public CrmUomCateg(String uomCategName) {
         this.uomCategName = uomCategName;
     }
     public CrmUomCateg(ConCompany conCompany, ConLife conLife, ConUser conUserByCreatebyId, ConUser conUserByWritebyId, String uomCategName, Date createdt, Date writedt, Set<CrmUom> crmUoms) {
@@ -70,7 +69,7 @@ public class CrmUomCateg  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="company_id", nullable=false)
+    @JoinColumn(name="company_id")
     public ConCompany getConCompany() {
         return this.conCompany;
     }

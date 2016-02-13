@@ -1,5 +1,5 @@
 package model;
-// Generated Feb 9, 2016 11:32:40 AM by Hibernate Tools 4.3.1
+// Generated Feb 16, 2016 7:40:44 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -45,10 +45,7 @@ public class ConObjectrights  implements java.io.Serializable {
     }
 
 	
-    public ConObjectrights(ConLife conLife, ConObjects conObjects, ConProfiles conProfiles, boolean canview, boolean canadd, boolean canedit, boolean candel, boolean canauthorize, boolean canapprove, boolean canexport) {
-        this.conLife = conLife;
-        this.conObjects = conObjects;
-        this.conProfiles = conProfiles;
+    public ConObjectrights(boolean canview, boolean canadd, boolean canedit, boolean candel, boolean canauthorize, boolean canapprove, boolean canexport) {
         this.canview = canview;
         this.canadd = canadd;
         this.canedit = canedit;
@@ -87,7 +84,7 @@ public class ConObjectrights  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="life", nullable=false)
+    @JoinColumn(name="life")
     public ConLife getConLife() {
         return this.conLife;
     }
@@ -97,7 +94,7 @@ public class ConObjectrights  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="object_id", nullable=false)
+    @JoinColumn(name="object_id")
     public ConObjects getConObjects() {
         return this.conObjects;
     }
@@ -107,7 +104,7 @@ public class ConObjectrights  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="profile_id", nullable=false)
+    @JoinColumn(name="profile_id")
     public ConProfiles getConProfiles() {
         return this.conProfiles;
     }

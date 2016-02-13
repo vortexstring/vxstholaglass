@@ -41,8 +41,6 @@
                         return null;
                     }//END  OF AJAX
 
-
-                    alert(param);
                     var myAjaxPostrequest = new GetXmlHttpObject();
                     myAjaxPostrequest.open("POST", path, true);
                     myAjaxPostrequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -63,7 +61,21 @@
                                 var areaData = respobj['uomqty'];
 
                                 var countData = respobj['pricecount'];
+                                alert("Count : "+countData);
 
+                                if(countData==0 || countData>1){
+            
+                                        dhtmlx.alert({
+                                        type: "alert-error",
+                                        text: respobj['error_msg'],
+                                        title: "Error while fetching Price",
+                                        ok: "Ok"
+                                         });
+                                 
+                                 
+                                
+                                }
+                            
                                 posglassForm.setFormData({
                                     uomid: respobj['uomid'], price: respobj['price'],
                                     percentdisc: respobj['percentdisc'], percentint: respobj['percentint'],
@@ -71,10 +83,10 @@
                                     amount: respobj['amount'], vatableamount: respobj['vatableamount'],
                                     vatamount: respobj['vatamount'], uomqty: respobj['uomqty'],
                                     qdate: respobj['qdate'], memo: respobj['memo'], itemsaleid: respobj['itemsaleid'],
-                                    vatrate: respobj['vatrate']
+                                    vatrate: respobj['vatrate'], vatid: respobj['vatid']
                                 });
                                 //alert("Area : "+areaData+" Price : "+priceData+" Count : "+countData);
-                                alert("PercentInt : " + respobj['vatrate'] + " Discount : " + respobj['percentdisc'] + " UOM : " + respobj['uomid'] + "Date is : :" + respobj['qdate'] + " ItemSale Id is :" + respobj['itemsaleid']);
+                                //alert("PercentInt : " + respobj['vatrate'] + " Discount : " + respobj['percentdisc'] + " UOM : " + respobj['uomid'] + "Date is : :" + respobj['qdate'] + " ItemSale Id is :" + respobj['itemsaleid']);
 
 
                             }

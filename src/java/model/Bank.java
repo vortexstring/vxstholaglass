@@ -1,5 +1,5 @@
 package model;
-// Generated Feb 9, 2016 11:32:40 AM by Hibernate Tools 4.3.1
+// Generated Feb 16, 2016 7:40:44 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -56,10 +56,6 @@ public class Bank  implements java.io.Serializable {
     public Bank() {
     }
 
-	
-    public Bank(ConLife conLife) {
-        this.conLife = conLife;
-    }
     public Bank(ConCompany conCompany, ConLife conLife, ConUser conUserByWritebyId, ConUser conUserByCreatebyId, String bankCode, String bankName, String description, String comments, String primaryMobileNo, String otherMobileNo, String primaryLandline, String otherLandline, String primaryEmail, String otherEmail, String boxAddress, String boxAddressCode, String boxAddressTown, String physicalAddress, Date createdt, Date writedt, Set<Branch> branches, Set<FinReceipt> finReceipts, Set<BankAccount> bankAccounts) {
        this.conCompany = conCompany;
        this.conLife = conLife;
@@ -109,7 +105,7 @@ public class Bank  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="life", nullable=false)
+    @JoinColumn(name="life")
     public ConLife getConLife() {
         return this.conLife;
     }

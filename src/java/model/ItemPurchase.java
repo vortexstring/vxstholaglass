@@ -1,5 +1,5 @@
 package model;
-// Generated Feb 9, 2016 11:32:40 AM by Hibernate Tools 4.3.1
+// Generated Feb 16, 2016 7:40:44 PM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -48,13 +48,7 @@ public class ItemPurchase  implements java.io.Serializable {
     }
 
 	
-    public ItemPurchase(AllCurrency allCurrency, ConLife conLife, CrmUom crmUom, FinVat finVat, Item item, PrcSuppliers prcSuppliers, BigDecimal unitPrice, Date effectiveFrom, Date effectiveTo, BigDecimal minQty, BigDecimal maxQty) {
-        this.allCurrency = allCurrency;
-        this.conLife = conLife;
-        this.crmUom = crmUom;
-        this.finVat = finVat;
-        this.item = item;
-        this.prcSuppliers = prcSuppliers;
+    public ItemPurchase(BigDecimal unitPrice, Date effectiveFrom, Date effectiveTo, BigDecimal minQty, BigDecimal maxQty) {
         this.unitPrice = unitPrice;
         this.effectiveFrom = effectiveFrom;
         this.effectiveTo = effectiveTo;
@@ -93,7 +87,7 @@ public class ItemPurchase  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="currency_id", nullable=false)
+    @JoinColumn(name="currency_id")
     public AllCurrency getAllCurrency() {
         return this.allCurrency;
     }
@@ -113,7 +107,7 @@ public class ItemPurchase  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="life", nullable=false)
+    @JoinColumn(name="life")
     public ConLife getConLife() {
         return this.conLife;
     }
@@ -143,7 +137,7 @@ public class ItemPurchase  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="uom_id", nullable=false)
+    @JoinColumn(name="uom_id")
     public CrmUom getCrmUom() {
         return this.crmUom;
     }
@@ -153,7 +147,7 @@ public class ItemPurchase  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="vat_id", nullable=false)
+    @JoinColumn(name="vat_id")
     public FinVat getFinVat() {
         return this.finVat;
     }
@@ -163,7 +157,7 @@ public class ItemPurchase  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="item_id", nullable=false)
+    @JoinColumn(name="item_id")
     public Item getItem() {
         return this.item;
     }
@@ -173,7 +167,7 @@ public class ItemPurchase  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="supplier_id", nullable=false)
+    @JoinColumn(name="supplier_id")
     public PrcSuppliers getPrcSuppliers() {
         return this.prcSuppliers;
     }

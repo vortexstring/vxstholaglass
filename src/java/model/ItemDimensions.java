@@ -1,5 +1,5 @@
 package model;
-// Generated Feb 9, 2016 11:32:40 AM by Hibernate Tools 4.3.1
+// Generated Feb 16, 2016 7:40:44 PM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -49,10 +49,7 @@ public class ItemDimensions  implements java.io.Serializable {
     }
 
 	
-    public ItemDimensions(ConLife conLife, CrmUom crmUom, Item item, BigDecimal length, BigDecimal lengthNum, BigDecimal lengthDenom, BigDecimal width, BigDecimal widthNum, BigDecimal widthDenom, BigDecimal thickness, BigDecimal thicknessNum, BigDecimal thicknessDenom) {
-        this.conLife = conLife;
-        this.crmUom = crmUom;
-        this.item = item;
+    public ItemDimensions(BigDecimal length, BigDecimal lengthNum, BigDecimal lengthDenom, BigDecimal width, BigDecimal widthNum, BigDecimal widthDenom, BigDecimal thickness, BigDecimal thicknessNum, BigDecimal thicknessDenom) {
         this.length = length;
         this.lengthNum = lengthNum;
         this.lengthDenom = lengthDenom;
@@ -106,7 +103,7 @@ public class ItemDimensions  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="life", nullable=false)
+    @JoinColumn(name="life")
     public ConLife getConLife() {
         return this.conLife;
     }
@@ -136,7 +133,7 @@ public class ItemDimensions  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="uom_id", nullable=false)
+    @JoinColumn(name="uom_id")
     public CrmUom getCrmUom() {
         return this.crmUom;
     }
@@ -146,7 +143,7 @@ public class ItemDimensions  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="item_id", nullable=false)
+    @JoinColumn(name="item_id")
     public Item getItem() {
         return this.item;
     }

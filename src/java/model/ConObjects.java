@@ -1,5 +1,5 @@
 package model;
-// Generated Feb 9, 2016 11:32:40 AM by Hibernate Tools 4.3.1
+// Generated Feb 16, 2016 7:40:44 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -31,8 +31,8 @@ public class ConObjects  implements java.io.Serializable {
      private Integer objectId;
      private ConLife conLife;
      private ConObjects conObjects;
-     private ConUser conUserByWritebyId;
      private ConUser conUserByCreatebyId;
+     private ConUser conUserByWritebyId;
      private String objectName;
      private String objectCode;
      private Integer level;
@@ -52,8 +52,7 @@ public class ConObjects  implements java.io.Serializable {
     }
 
 	
-    public ConObjects(ConLife conLife, String objectName, int isreport, boolean isgraph, boolean isbuttonselect, boolean isbuttonselectwithmenu, int hasnotification, boolean hasreportsubmenu) {
-        this.conLife = conLife;
+    public ConObjects(String objectName, int isreport, boolean isgraph, boolean isbuttonselect, boolean isbuttonselectwithmenu, int hasnotification, boolean hasreportsubmenu) {
         this.objectName = objectName;
         this.isreport = isreport;
         this.isgraph = isgraph;
@@ -62,11 +61,11 @@ public class ConObjects  implements java.io.Serializable {
         this.hasnotification = hasnotification;
         this.hasreportsubmenu = hasreportsubmenu;
     }
-    public ConObjects(ConLife conLife, ConObjects conObjects, ConUser conUserByWritebyId, ConUser conUserByCreatebyId, String objectName, String objectCode, Integer level, int isreport, boolean isgraph, boolean isbuttonselect, boolean isbuttonselectwithmenu, int hasnotification, boolean hasreportsubmenu, Date createdt, Date writedt, Set<ConObjects> conObjectses, Set<ConObjectrights> conObjectrightses, Set<ConObjectscaption> conObjectscaptions) {
+    public ConObjects(ConLife conLife, ConObjects conObjects, ConUser conUserByCreatebyId, ConUser conUserByWritebyId, String objectName, String objectCode, Integer level, int isreport, boolean isgraph, boolean isbuttonselect, boolean isbuttonselectwithmenu, int hasnotification, boolean hasreportsubmenu, Date createdt, Date writedt, Set<ConObjects> conObjectses, Set<ConObjectrights> conObjectrightses, Set<ConObjectscaption> conObjectscaptions) {
        this.conLife = conLife;
        this.conObjects = conObjects;
-       this.conUserByWritebyId = conUserByWritebyId;
        this.conUserByCreatebyId = conUserByCreatebyId;
+       this.conUserByWritebyId = conUserByWritebyId;
        this.objectName = objectName;
        this.objectCode = objectCode;
        this.level = level;
@@ -96,7 +95,7 @@ public class ConObjects  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="life", nullable=false)
+    @JoinColumn(name="life")
     public ConLife getConLife() {
         return this.conLife;
     }
@@ -116,16 +115,6 @@ public class ConObjects  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="writeby_id")
-    public ConUser getConUserByWritebyId() {
-        return this.conUserByWritebyId;
-    }
-    
-    public void setConUserByWritebyId(ConUser conUserByWritebyId) {
-        this.conUserByWritebyId = conUserByWritebyId;
-    }
-
-@ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="createby_id")
     public ConUser getConUserByCreatebyId() {
         return this.conUserByCreatebyId;
@@ -133,6 +122,16 @@ public class ConObjects  implements java.io.Serializable {
     
     public void setConUserByCreatebyId(ConUser conUserByCreatebyId) {
         this.conUserByCreatebyId = conUserByCreatebyId;
+    }
+
+@ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="writeby_id")
+    public ConUser getConUserByWritebyId() {
+        return this.conUserByWritebyId;
+    }
+    
+    public void setConUserByWritebyId(ConUser conUserByWritebyId) {
+        this.conUserByWritebyId = conUserByWritebyId;
     }
 
     

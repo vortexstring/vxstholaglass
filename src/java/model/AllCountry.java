@@ -1,5 +1,5 @@
 package model;
-// Generated Feb 9, 2016 11:32:40 AM by Hibernate Tools 4.3.1
+// Generated Feb 16, 2016 7:40:44 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -42,10 +42,6 @@ public class AllCountry  implements java.io.Serializable {
     public AllCountry() {
     }
 
-	
-    public AllCountry(ConLife conLife) {
-        this.conLife = conLife;
-    }
     public AllCountry(ConLife conLife, ConUser conUserByWritebyId, ConUser conUserByCreatebyId, String countryCode, String countryName, Date createdt, Date writedt, Set<ConCompany> conCompanies, Set<CrmCustomer> crmCustomers) {
        this.conLife = conLife;
        this.conUserByWritebyId = conUserByWritebyId;
@@ -71,7 +67,7 @@ public class AllCountry  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="life", nullable=false)
+    @JoinColumn(name="life")
     public ConLife getConLife() {
         return this.conLife;
     }

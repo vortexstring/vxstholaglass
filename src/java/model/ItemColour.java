@@ -1,5 +1,5 @@
 package model;
-// Generated Feb 9, 2016 11:32:40 AM by Hibernate Tools 4.3.1
+// Generated Feb 16, 2016 7:40:44 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -41,8 +41,7 @@ public class ItemColour  implements java.io.Serializable {
     }
 
 	
-    public ItemColour(ConLife conLife, String ralNo) {
-        this.conLife = conLife;
+    public ItemColour(String ralNo) {
         this.ralNo = ralNo;
     }
     public ItemColour(ConCompany conCompany, ConLife conLife, ConUser conUserByWritebyId, ConUser conUserByCreatebyId, Item item, String ralNo, String colourCode, String colourName, Date createdt, Date writedt) {
@@ -81,7 +80,7 @@ public class ItemColour  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="life", nullable=false)
+    @JoinColumn(name="life")
     public ConLife getConLife() {
         return this.conLife;
     }

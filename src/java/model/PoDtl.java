@@ -1,5 +1,5 @@
 package model;
-// Generated Feb 9, 2016 11:32:40 AM by Hibernate Tools 4.3.1
+// Generated Feb 16, 2016 7:40:44 PM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -45,11 +45,7 @@ public class PoDtl  implements java.io.Serializable {
     }
 
 	
-    public PoDtl(ConLife conLife, CrmUom crmUom, Item item, PrcPurchaseOrder prcPurchaseOrder, BigDecimal price, BigDecimal amount, int qty) {
-        this.conLife = conLife;
-        this.crmUom = crmUom;
-        this.item = item;
-        this.prcPurchaseOrder = prcPurchaseOrder;
+    public PoDtl(BigDecimal price, BigDecimal amount, int qty) {
         this.price = price;
         this.amount = amount;
         this.qty = qty;
@@ -93,7 +89,7 @@ public class PoDtl  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="life", nullable=false)
+    @JoinColumn(name="life")
     public ConLife getConLife() {
         return this.conLife;
     }
@@ -123,7 +119,7 @@ public class PoDtl  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="uom_id", nullable=false)
+    @JoinColumn(name="uom_id")
     public CrmUom getCrmUom() {
         return this.crmUom;
     }
@@ -133,7 +129,7 @@ public class PoDtl  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="item_id", nullable=false)
+    @JoinColumn(name="item_id")
     public Item getItem() {
         return this.item;
     }
@@ -143,7 +139,7 @@ public class PoDtl  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="purchaseorder_id", nullable=false)
+    @JoinColumn(name="purchaseorder_id")
     public PrcPurchaseOrder getPrcPurchaseOrder() {
         return this.prcPurchaseOrder;
     }

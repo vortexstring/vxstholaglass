@@ -38,12 +38,12 @@ public class ProductsVH {
 
     public String getGrid() {
         rspgridData = getProductLevels();
-        gridString = " productsGrid.setColTypes(\"ro,ro,ro" + rspgridData.get("ColTypes") + "\");"
-                + " productsGrid.setHeader(\"#,Code,Product Name" + rspgridData.get("headers") + "\");"
-                + " productsGrid.setColAlign(\"left,left,left" + rspgridData.get("colAlign") + "\");"
-                + "  productsGrid.setInitWidthsP(\"5,10,25" + rspgridData.get("InitWidthsP") + "\");"
-                + "  productsGrid.attachHeader(\",#text_filter,#text_filter" + rspgridData.get("filterHeader") + "\");"
-                + "  productsGrid.setColSorting(\"int,str,str" + rspgridData.get("gridSorting") + "\");";
+      gridString = " productsGrid.setColTypes(\"ro,ro" + rspgridData.get("ColTypes") + "\");"
+                + " productsGrid.setHeader(\"#,Code" + rspgridData.get("headers") + "\");"
+                + " productsGrid.setColAlign(\"left,left" + rspgridData.get("colAlign") + "\");"
+                + "  productsGrid.setInitWidthsP(\"5,10" + rspgridData.get("InitWidthsP") + "\");"
+                + "  productsGrid.attachHeader(\",#text_filter" + rspgridData.get("filterHeader") + "\");"
+                + "  productsGrid.setColSorting(\"int,str" + rspgridData.get("gridSorting") + "\");";
 
         return gridString;
     }
@@ -52,7 +52,7 @@ public class ProductsVH {
 
         try {
             DataLoader ME = new DataLoader();
-            mydata = ME.getData("FROM ItemLevel WHERE life!=2");
+            mydata = ME.getData("FROM ItemLevel WHERE itemLevelId!=0 ORDER BY itemLevelId DESC");
             Integer colSize = mydata.size();
             if (!mydata.isEmpty()) {
                 i = 1;
@@ -63,8 +63,8 @@ public class ProductsVH {
 
                     headers = headers + "," + OBJ.getLevelName();
                     colAlign = colAlign + ",left";
-                    InitWidthsP = InitWidthsP + "," + 60 / colSize;
-                    filterHeader = filterHeader + ",#text_filter";
+                    InitWidthsP = InitWidthsP + "," + 85 / colSize;
+                    filterHeader = filterHeader + ",#combo_filter";
                     gridSorting = gridSorting + ",str";
                     ColTypes = ColTypes + ",ro";
                     i++;

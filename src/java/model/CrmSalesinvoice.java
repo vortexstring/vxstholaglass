@@ -1,5 +1,5 @@
 package model;
-// Generated Feb 9, 2016 11:32:40 AM by Hibernate Tools 4.3.1
+// Generated Feb 16, 2016 7:40:44 PM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -61,8 +61,7 @@ public class CrmSalesinvoice  implements java.io.Serializable {
     }
 
 	
-    public CrmSalesinvoice(ConCompany conCompany, BigDecimal totalPrice, BigDecimal totalDiscount, BigDecimal totalInterest, BigDecimal totalVatableAmount, boolean isfullypaid, BigDecimal vatAmount, boolean closed) {
-        this.conCompany = conCompany;
+    public CrmSalesinvoice(BigDecimal totalPrice, BigDecimal totalDiscount, BigDecimal totalInterest, BigDecimal totalVatableAmount, boolean isfullypaid, BigDecimal vatAmount, boolean closed) {
         this.totalPrice = totalPrice;
         this.totalDiscount = totalDiscount;
         this.totalInterest = totalInterest;
@@ -123,7 +122,7 @@ public class CrmSalesinvoice  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="company_id", nullable=false)
+    @JoinColumn(name="company_id")
     public ConCompany getConCompany() {
         return this.conCompany;
     }

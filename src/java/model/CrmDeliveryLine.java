@@ -1,5 +1,5 @@
 package model;
-// Generated Feb 9, 2016 11:32:40 AM by Hibernate Tools 4.3.1
+// Generated Feb 16, 2016 7:40:44 PM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -66,8 +66,7 @@ public class CrmDeliveryLine  implements java.io.Serializable {
     }
 
 	
-    public CrmDeliveryLine(ConCompany conCompany, int qty, BigDecimal discount, BigDecimal interest, BigDecimal percentDisc, BigDecimal percentInt, BigDecimal amount, BigDecimal vatableAmount, BigDecimal vatAmount, BigDecimal uomQty, BigDecimal dimensionLengthNum, BigDecimal dimensionLengthDenom, BigDecimal dimensionWidthNum, BigDecimal dimensionWidthDenom) {
-        this.conCompany = conCompany;
+    public CrmDeliveryLine(int qty, BigDecimal discount, BigDecimal interest, BigDecimal percentDisc, BigDecimal percentInt, BigDecimal amount, BigDecimal vatableAmount, BigDecimal vatAmount, BigDecimal uomQty, BigDecimal dimensionLengthNum, BigDecimal dimensionLengthDenom, BigDecimal dimensionWidthNum, BigDecimal dimensionWidthDenom) {
         this.qty = qty;
         this.discount = discount;
         this.interest = interest;
@@ -132,7 +131,7 @@ public class CrmDeliveryLine  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="company_id", nullable=false)
+    @JoinColumn(name="company_id")
     public ConCompany getConCompany() {
         return this.conCompany;
     }

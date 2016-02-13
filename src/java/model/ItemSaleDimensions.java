@@ -1,5 +1,5 @@
 package model;
-// Generated Feb 9, 2016 11:32:40 AM by Hibernate Tools 4.3.1
+// Generated Feb 16, 2016 7:40:44 PM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -43,7 +43,7 @@ public class ItemSaleDimensions  implements java.io.Serializable {
      private BigDecimal thicknessNum;
      private BigDecimal thicknessDenom;
      private int uomId;
-     private int life;
+     private Integer life;
      private Integer createbyId;
      private Date createdt;
      private Integer writebyId;
@@ -54,8 +54,7 @@ public class ItemSaleDimensions  implements java.io.Serializable {
     }
 
 	
-    public ItemSaleDimensions(Item item, BigDecimal length, BigDecimal lengthNum, BigDecimal lengthDenom, BigDecimal width, BigDecimal widthNum, BigDecimal widthDenom, BigDecimal thickness, BigDecimal thicknessNum, BigDecimal thicknessDenom, int uomId, int life) {
-        this.item = item;
+    public ItemSaleDimensions(BigDecimal length, BigDecimal lengthNum, BigDecimal lengthDenom, BigDecimal width, BigDecimal widthNum, BigDecimal widthDenom, BigDecimal thickness, BigDecimal thicknessNum, BigDecimal thicknessDenom, int uomId) {
         this.length = length;
         this.lengthNum = lengthNum;
         this.lengthDenom = lengthDenom;
@@ -66,9 +65,8 @@ public class ItemSaleDimensions  implements java.io.Serializable {
         this.thicknessNum = thicknessNum;
         this.thicknessDenom = thicknessDenom;
         this.uomId = uomId;
-        this.life = life;
     }
-    public ItemSaleDimensions(Item item, Integer posLineId, Integer quoteLineId, Integer productionOrderLineId, Integer jobcardLineId, Integer salesOrderLineId, BigDecimal length, BigDecimal lengthNum, BigDecimal lengthDenom, BigDecimal width, BigDecimal widthNum, BigDecimal widthDenom, BigDecimal thickness, BigDecimal thicknessNum, BigDecimal thicknessDenom, int uomId, int life, Integer createbyId, Date createdt, Integer writebyId, Date writedt, Integer companyId) {
+    public ItemSaleDimensions(Item item, Integer posLineId, Integer quoteLineId, Integer productionOrderLineId, Integer jobcardLineId, Integer salesOrderLineId, BigDecimal length, BigDecimal lengthNum, BigDecimal lengthDenom, BigDecimal width, BigDecimal widthNum, BigDecimal widthDenom, BigDecimal thickness, BigDecimal thicknessNum, BigDecimal thicknessDenom, int uomId, Integer life, Integer createbyId, Date createdt, Integer writebyId, Date writedt, Integer companyId) {
        this.item = item;
        this.posLineId = posLineId;
        this.quoteLineId = quoteLineId;
@@ -106,7 +104,7 @@ public class ItemSaleDimensions  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="item_id", nullable=false)
+    @JoinColumn(name="item_id")
     public Item getItem() {
         return this.item;
     }
@@ -266,12 +264,12 @@ public class ItemSaleDimensions  implements java.io.Serializable {
     }
 
     
-    @Column(name="life", nullable=false)
-    public int getLife() {
+    @Column(name="life")
+    public Integer getLife() {
         return this.life;
     }
     
-    public void setLife(int life) {
+    public void setLife(Integer life) {
         this.life = life;
     }
 

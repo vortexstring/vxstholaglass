@@ -1,5 +1,5 @@
 package model;
-// Generated Feb 9, 2016 11:32:40 AM by Hibernate Tools 4.3.1
+// Generated Feb 16, 2016 7:40:44 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -43,8 +43,7 @@ public class BankAccount  implements java.io.Serializable {
     }
 
 	
-    public BankAccount(ConLife conLife, boolean isdefault) {
-        this.conLife = conLife;
+    public BankAccount(boolean isdefault) {
         this.isdefault = isdefault;
     }
     public BankAccount(AllCurrency allCurrency, Bank bank, ConCompany conCompany, ConLife conLife, ConUser conUserByWritebyId, ConUser conUserByCreatebyId, String accountName, String accountNumber, String accountType, boolean isdefault, Date createdt, Date writedt) {
@@ -105,7 +104,7 @@ public class BankAccount  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="life", nullable=false)
+    @JoinColumn(name="life")
     public ConLife getConLife() {
         return this.conLife;
     }

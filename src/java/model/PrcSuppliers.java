@@ -1,5 +1,5 @@
 package model;
-// Generated Feb 9, 2016 11:32:40 AM by Hibernate Tools 4.3.1
+// Generated Feb 16, 2016 7:40:44 PM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -71,10 +71,6 @@ public class PrcSuppliers  implements java.io.Serializable {
     public PrcSuppliers() {
     }
 
-	
-    public PrcSuppliers(ConLife conLife) {
-        this.conLife = conLife;
-    }
     public PrcSuppliers(AllCurrency allCurrency, ConCompany conCompany, ConLife conLife, ConUser conUserByWritebyId, ConUser conUserByCreatebyId, Paymode paymode, Payterm payterm, String photoPath, Date admnDate, String supplierCode, String supplierName, String othername, String taxcode, String pinno, Boolean credit, BigDecimal creditLimit, BigDecimal openBalance, BigDecimal balance, String location, String contactPerson, String primaryMobileNo, String otherMobileNo, String primaryLandline, String otherLandline, String primaryEmail, String otherEmail, String boxAddress, String boxAddressCode, String boxAddressTown, String physicalAddress, String website, Date createdt, Date writedt, Set<InvGoodsreceived> invGoodsreceiveds, Set<PrcPurchaseOrder> prcPurchaseOrders, Set<FinReceipt> finReceipts, Set<ItemPurchase> itemPurchases) {
        this.allCurrency = allCurrency;
        this.conCompany = conCompany;
@@ -148,7 +144,7 @@ public class PrcSuppliers  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="life", nullable=false)
+    @JoinColumn(name="life")
     public ConLife getConLife() {
         return this.conLife;
     }

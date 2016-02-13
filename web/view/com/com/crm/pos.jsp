@@ -117,7 +117,7 @@
                 type: {
                     template: "<div id='container' style='overflow-y: hidden;'><table><tr align='center' ><td padding=5  > #productname#</td></tr><tr><td><b> #productcode#</b></td></table></div>",
                     height: 60,
-                    width: 110,
+                    width: 260,
                     columns: 2
                 },
             });
@@ -169,7 +169,7 @@
                 productsview.load("viewmodel/dataview/com/com/crm/products.jsp?productCategory=" + productCategory, "json");
                 // alert(productCategory);
                 productsview.attachEvent("onItemClick", function (id, ev, html) {
-
+                     var productid=id;
                     var pcategory = categoryGrid.cells(rId, 1).getValue();
                     var pname = productsview.get(id).productname;
                     var winLabel1 = pcategory + "--" + pname;
@@ -200,13 +200,13 @@
                         var winexist = dhxWins.isWindow("productsale" + uomID);
                         // var quotekey = window.quote;
                         if (winexist == false) {
-                            createSaleWindow(posmainTabbar, id, winLabel, posLineGrid);
+                            createSaleWindow(posmainTabbar, id, winLabel, posLineGrid,productid);
                         } else {
                             //window(id).close();
                             //dhxWins.window("productsale"+id).show();
                             //dhxWins.window("productsale"+id).bringToTop()
                             dhxWins.window("productsale" + uomID).close();
-                            createSaleWindow(posmainTabbar, id, winLabel, posLineGrid);
+                            createSaleWindow(posmainTabbar, id, winLabel, posLineGrid,productid);
                         }
                     });
 
@@ -266,11 +266,11 @@
             posLineGrid.init();
 
             posLineGrid.attachEvent("onXLS", function () {
-                salesLayout.cells("b").progressOn();
+               // salesLayout.cells("b").progressOn();
             });
             posLineGrid.load("viewmodel/grid/com/com/crm/customerspos.jsp", "json");
             posLineGrid.attachEvent("onXLE", function () {
-                salesLayout.cells("b").progressOff();
+               // salesLayout.cells("b").progressOff();
             });
             posLineGrid.attachEvent("onRowSelect", function (rId, cInd) {
                 alert(rId);
@@ -343,11 +343,16 @@
 //                    var saleswin = dhxWins.createWindow("productsale" + productPrice, 150, 30, 800, 500);
 //                            saleswin.setText("<b>Product sale Details (Select Product price and Sale units)</b>");
 //                    }  createSaleWindow(posmainTabbar, id,winLabel);
-            function createSaleWindow(posmainTabbar, itemsaleunitsid, pname) {
+            function createSaleWindow(posmainTabbar, itemsaleunitsid, pname,posLineGrid,productid) {
 
                 var salewin = dhxWins.createWindow("productsale" + itemsaleunitsid, 250, 10, 1250, 800);
                 // var pname=productsview.get(productPrice);
+                salewin.attachEvent("onClose", function (win) {
+                    win.hide();
+                    posLineGrid.clearAll();
+                    posLineGrid.load("viewmodel/grid/com/com/crm/customerspos.jsp", "json");
 
+                });
                 salewin.setText("<b>" + pname + "</b>");
                 //return true;
                 var winLayout = salewin.attachLayout({
@@ -356,18 +361,19 @@
                         {id: "a", text: "Views", header: false, height: 300},
                     ]
                 });
-                loadWindowdata(winLayout, itemsaleunitsid, posLineGrid);
+                loadWindowdata(winLayout, itemsaleunitsid, posLineGrid,productid);
                 //                var posglassForm = createPosGlassform(winLayout,  rId);
 
             }
             // var posglassForm = createPosGlassform(winLayout,  rId);
 
-            function loadWindowdata(winLayout, rId, posLineGrid) {
+            function loadWindowdata(winLayout, rId, posLineGrid,productid) {
 
                 var posglassForm = winLayout.cells("a").attachForm();
                 winLayout.cells("a").progressOn();
 //alert ("./viewmodel/form/com/com/crm/posglass.jsp?id=" + rId);
-                posglassForm.loadStruct("./viewmodel/form/com/com/crm/posglass.jsp?id=-1&itemsaleunitsid=" + rId, function () {
+             // alert("./viewmodel/form/com/com/crm/posglass.jsp?id=-1&itemsaleunitsid=" + rId+"&productid="+productid);
+                posglassForm.loadStruct("./viewmodel/form/com/com/crm/posglass.jsp?id=-1&itemsaleunitsid=" + rId+"&productid="+productid, function () {
                     winLayout.cells("a").progressOff();
                 });
                 //attachURL("./viewmodel/form/com/com/crm/posglass.jsp");

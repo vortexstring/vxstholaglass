@@ -1,5 +1,5 @@
 package model;
-// Generated Feb 9, 2016 11:32:40 AM by Hibernate Tools 4.3.1
+// Generated Feb 16, 2016 7:40:44 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -52,10 +52,6 @@ public class InvGoodsreceived  implements java.io.Serializable {
     public InvGoodsreceived() {
     }
 
-	
-    public InvGoodsreceived(ConLife conLife) {
-        this.conLife = conLife;
-    }
     public InvGoodsreceived(AllStatus allStatus, ConCompany conCompany, ConLife conLife, ConUser conUserByCreatebyId, ConUser conUserByWritebyId, PrcPurchaseOrder prcPurchaseOrder, PrcSuppliers prcSuppliers, String grnCode, Date grnDate, Date grnPrepareDate, String grmMemo, String grnRef, String deliveryNo, String batchNo, Date deliverynoteDate, String deliverynoteRef, Date createdt, Date writedt, Set<InvGoodsreceivedLine> invGoodsreceivedLines) {
        this.allStatus = allStatus;
        this.conCompany = conCompany;
@@ -111,7 +107,7 @@ public class InvGoodsreceived  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="life", nullable=false)
+    @JoinColumn(name="life")
     public ConLife getConLife() {
         return this.conLife;
     }

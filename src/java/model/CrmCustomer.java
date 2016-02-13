@@ -1,5 +1,5 @@
 package model;
-// Generated Feb 9, 2016 11:32:40 AM by Hibernate Tools 4.3.1
+// Generated Feb 16, 2016 7:40:44 PM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -70,11 +70,6 @@ public class CrmCustomer  implements java.io.Serializable {
     public CrmCustomer() {
     }
 
-	
-    public CrmCustomer(ConCompany conCompany, ConLife conLife) {
-        this.conCompany = conCompany;
-        this.conLife = conLife;
-    }
     public CrmCustomer(AllCountry allCountry, CommonCombo commonCombo, ConCompany conCompany, ConLife conLife, ConUser conUserByCreatebyId, ConUser conUserByWritebyId, CrmCustomerCategory crmCustomerCategory, HrmEmployee hrmEmployee, Payterm payterm, Date admnDate, String customerCode, String surname, String othername, Integer idNo, String vatNo, String pinNo, String memo, Boolean credit, BigDecimal creditLimit, String contactPerson, String primaryMobileNo, String primaryLandline, String primaryEmail, String boxAddress, String boxAddressCode, String boxAddressTown, String physicalAddress, Date createdt, Date writedt, Set<CrmSalesinvoice> crmSalesinvoices, Set<CrmDelivery> crmDeliveries, Set<MfcJobcard> mfcJobcards, Set<CrmQuote> crmQuotes, Set<ItemCustomPrices> itemCustomPriceses, Set<CrmSalesorder> crmSalesorders, Set<FinReceipt> finReceipts) {
        this.allCountry = allCountry;
        this.commonCombo = commonCombo;
@@ -147,7 +142,7 @@ public class CrmCustomer  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="company_id", nullable=false)
+    @JoinColumn(name="company_id")
     public ConCompany getConCompany() {
         return this.conCompany;
     }
@@ -157,7 +152,7 @@ public class CrmCustomer  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="life", nullable=false)
+    @JoinColumn(name="life")
     public ConLife getConLife() {
         return this.conLife;
     }

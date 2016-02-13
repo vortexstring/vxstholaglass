@@ -23,40 +23,37 @@
 <%   strid = request.getParameter("id");
     id = Integer.parseInt(strid);
 
-    DataLoader ME = new DataLoader();
-    StringBuilder myquery = new StringBuilder("FROM Item where life=1 AND itemLevel>0 AND itemId=" + id);
+    out.println("{");
+    out.println("settings: {");
+    out.println("align: \"left\",");
+    out.println("hrefmode:\"ajax\",");
+    out.println("skin: \"dhx_terrace\",");
+    out.println("},");
+    out.println("tabs: [");
+    out.println(" {id: \"product\", text: \"Product\",active: 1, width: \"auto\" },");
+    if (!strid.equals("-1")) {
+        DataLoader ME = new DataLoader();
+        StringBuilder myquery = new StringBuilder("FROM Item where life=1 AND itemLevel>0 AND itemId=" + id);
 
-    mydata = ME.getData(myquery.toString());
+        mydata = ME.getData(myquery.toString());
 
-    if (!mydata.isEmpty()) {
-        i = 1;
+        if (!mydata.isEmpty()) {
+            i = 1;
 
-        out.println("{");
-        out.println("settings: {");
-        out.println("align: \"left\",");
-        out.println("hrefmode:\"ajax\",");
-        out.println("skin: \"dhx_terrace\",");
-        out.println("},");
-        out.println("tabs: [");
+            //LOOP THROUGH THE GRID
+            for (Iterator iterator = mydata.iterator(); iterator.hasNext();) {
+                Item OBJ = (Item) iterator.next();
 
-        //LOOP THROUGH THE GRID
-        for (Iterator iterator = mydata.iterator(); iterator.hasNext();) {
-            Item OBJ = (Item) iterator.next();
+                if (OBJ.getItemConfiguration().isIsSold()) {
+                    out.println(" {id: \"saledetails\", text: \"Sale Details\" , width: \"auto\" , href: \"./view/com/com/crm/productsale.jsp?id='" + id + "'\"},");
 
-            out.println(" {id: \"product\", text: \"Product\",active: 1, width: \"auto\" },");
+                }
 
-            
-         if (OBJ.getItemConfiguration().isIsSold()) {
-                out.println(" {id: \"saledetails\", text: \"Sale Details\" , width: \"auto\" , href: \"./view/com/com/crm/productsale.jsp?id='"+id+"'\"},");
+                if (OBJ.getItemConfiguration().isIsPurchased()) {
+                    out.println(" {id: \"purchasedetails\", text: \"Purchase Details\" , width: \"auto\" , href: \"./view/com/com/crm/productpurchase.jsp?id=" + id + "\"},");
 
-            }
-         
-         
-            if (OBJ.getItemConfiguration().isIsPurchased()) {
-                out.println(" {id: \"purchasedetails\", text: \"Purchase Details\" , width: \"auto\" , href: \"./view/com/com/crm/productpurchase.jsp?id="+id+"\"},");
-
-            }
-          /*  
+                }
+                /*  
                if (OBJ.getItemConfiguration().isIsProduction()) {
                 out.println(" {id: \"production\", text: \"Production details\" , width: \"auto\" , href: \"./view/com/com/crm/productproduction.jsp\"},");
 
@@ -78,13 +75,18 @@
                 out.println(" {id: \"colour\", text: \"Colour\" , width: \"auto\" , href: \"./view/com/com/crm/productcolor.jsp?id="+id+"\"},");
 
             }
-*/
+                 */
 
-            // out.println(" {id: \""+OBJ.getItemConfiguration().getConfigurationName()+"\", text: \""+OBJ.getItemConfiguration().getConfigurationName()+"\"}");
-            i++;
+                // out.println(" {id: \""+OBJ.getItemConfiguration().getConfigurationName()+"\", text: \""+OBJ.getItemConfiguration().getConfigurationName()+"\"}");
+                i++;
+            }
+
         }
-        out.println("]}");
+        ME.closeListSession();
+    } else {
+
     }
-    ME.closeListSession();
+
+    out.println("]}");
 %>  
 

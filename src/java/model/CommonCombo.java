@@ -1,5 +1,5 @@
 package model;
-// Generated Feb 9, 2016 11:32:40 AM by Hibernate Tools 4.3.1
+// Generated Feb 16, 2016 7:40:44 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -37,10 +37,6 @@ public class CommonCombo  implements java.io.Serializable {
     public CommonCombo() {
     }
 
-	
-    public CommonCombo(ConLife conLife) {
-        this.conLife = conLife;
-    }
     public CommonCombo(CommonCombo commonCombo, ConLife conLife, String comboType, String comboName, Set<InvAdjustments> invAdjustmentses, Set<CrmCustomer> crmCustomers, Set<CommonCombo> commonCombos) {
        this.commonCombo = commonCombo;
        this.conLife = conLife;
@@ -74,7 +70,7 @@ public class CommonCombo  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="life", nullable=false)
+    @JoinColumn(name="life")
     public ConLife getConLife() {
         return this.conLife;
     }

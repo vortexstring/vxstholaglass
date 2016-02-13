@@ -1,5 +1,5 @@
 package model;
-// Generated Feb 9, 2016 11:32:40 AM by Hibernate Tools 4.3.1
+// Generated Feb 16, 2016 7:40:44 PM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -45,10 +45,6 @@ public class FinReceiptLine  implements java.io.Serializable {
     public FinReceiptLine() {
     }
 
-	
-    public FinReceiptLine(ConLife conLife) {
-        this.conLife = conLife;
-    }
     public FinReceiptLine(ConCompany conCompany, ConLife conLife, ConUser conUserByCreatebyId, ConUser conUserByWritebyId, FinReceipt finReceipt, Integer salesinvoiceId, BigDecimal amount, BigDecimal amountPaid, BigDecimal balance, Integer cr, Integer paymodeId, String memo, Date createdt, Date writedt) {
        this.conCompany = conCompany;
        this.conLife = conLife;
@@ -89,7 +85,7 @@ public class FinReceiptLine  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="life", nullable=false)
+    @JoinColumn(name="life")
     public ConLife getConLife() {
         return this.conLife;
     }

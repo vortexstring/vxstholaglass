@@ -1,5 +1,5 @@
 package model;
-// Generated Feb 9, 2016 11:32:40 AM by Hibernate Tools 4.3.1
+// Generated Feb 16, 2016 7:40:44 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -40,10 +40,7 @@ public class ConNotifications  implements java.io.Serializable {
     }
 
 	
-    public ConNotifications(ConLife conLife, ConUser conUserByCreatebyId, ConUser conUserByWritebyId, int objectId, String notifColumnName, String notifCriteria, Date createdt, Date writedt) {
-        this.conLife = conLife;
-        this.conUserByCreatebyId = conUserByCreatebyId;
-        this.conUserByWritebyId = conUserByWritebyId;
+    public ConNotifications(int objectId, String notifColumnName, String notifCriteria, Date createdt, Date writedt) {
         this.objectId = objectId;
         this.notifColumnName = notifColumnName;
         this.notifCriteria = notifCriteria;
@@ -75,7 +72,7 @@ public class ConNotifications  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="life", nullable=false)
+    @JoinColumn(name="life")
     public ConLife getConLife() {
         return this.conLife;
     }
@@ -85,7 +82,7 @@ public class ConNotifications  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="createby_id", nullable=false)
+    @JoinColumn(name="createby_id")
     public ConUser getConUserByCreatebyId() {
         return this.conUserByCreatebyId;
     }
@@ -95,7 +92,7 @@ public class ConNotifications  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="writeby_id", nullable=false)
+    @JoinColumn(name="writeby_id")
     public ConUser getConUserByWritebyId() {
         return this.conUserByWritebyId;
     }

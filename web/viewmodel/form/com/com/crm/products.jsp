@@ -18,6 +18,7 @@
     String strid, struserid, strprofileid, formq, queryFilter, edit, del, createdt, writedt;
     Integer CMprofileid, CMcompanyid, id, CMuserid, lifeid, createbyid, writebyid;
     List formdata;
+   
     java.util.Date DTcreatedt, DTwritedt;
     RightsHelper RH = new RightsHelper();
     DateHelper DH = new DateHelper();
@@ -25,8 +26,8 @@
     /**
      * ********Form specific fields***********
      */
-    String itemcode, itemname, itemicon;
-    Integer itemconfigurationid, itemlevelid, parentid, itemsort, status;
+    String itemcode, itemname, itemicon,strparentid;
+    Integer itemconfigurationid, itemlevelid,  itemsort,parentid,paramparentid, status;
 %>
 
 <%
@@ -36,12 +37,16 @@
     strprofileid = session.getAttribute("profileid").toString();
     struserid = session.getAttribute("userid").toString();
     strid = request.getParameter("id");
+    if(!request.getParameter("parentid").isEmpty()){
+    strparentid = request.getParameter("parentid");
+    }
 
     queryFilter = "";
     id = Integer.valueOf(strid);
     CMuserid = Integer.valueOf(struserid);
     CMprofileid = Integer.valueOf(strprofileid);
-
+    paramparentid = Integer.valueOf(strparentid);
+    
     RH.fetchRightsdata("products", CMprofileid);
     edit = RH.formRightsStmt(RH.isCanedit());
     del = RH.formRightsStmt(RH.isCandel());
@@ -88,7 +93,8 @@
         itemsort = 0;
         itemconfigurationid = 1;
         status = 1;
-        parentid = 1;
+          parentid = 0;
+        if(!strparentid.isEmpty()){parentid=paramparentid;}
         itemlevelid = 1;
 
         createbyid = CMuserid;
@@ -110,7 +116,7 @@
 {type: "input", name:"itemicon",label:"Itemicon", value:"<% out.print(itemicon); %>" , validate:"ValidateLength"},
 {type: "combo", name:"itemconfigurationid",label: "Itemconfigurationid", filtering:true , options:[<% out.print(CHitemconfigurationid.LoadCombo("itemconfigurationid", queryFilter, itemconfigurationid)); %>]} ,
 {type: "combo", name:"itemlevelid",label: "Itemlevelid", filtering:true , options:[<% out.print(CHitemlevelid.LoadCombo("itemlevelid", queryFilter, itemlevelid)); %>]} ,
-{type: "combo", name:"parentid",label: "Parentid", filtering:true , options:[<% out.print(CHparentid.LoadCombo("itemid", queryFilter, parentid)); %>]} ,
+{type: "combo", name:"parentid",label: "Parent item", filtering:true , options:[<% out.print(CHparentid.LoadCombo("itemid", queryFilter, parentid)); %>]} ,
 {type: "input", name:"itemsort",label:"Itemsort", value:"<% out.print(itemsort); %>" , validate:"ValidateLength"},
 {type: "combo", name:"status",label: "Status", filtering:true , options:[<% out.print(CHstatus.LoadCombo("statusid", queryFilter, status)); %>]} ,
 {type: "hidden", name:"createdt", id:"createdt", value:"<% out.print(createdt);%>"},

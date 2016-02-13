@@ -1,5 +1,5 @@
 package model;
-// Generated Feb 9, 2016 11:32:40 AM by Hibernate Tools 4.3.1
+// Generated Feb 16, 2016 7:40:44 PM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -60,8 +60,7 @@ public class InvGoodsreceivedLine  implements java.io.Serializable {
     }
 
 	
-    public InvGoodsreceivedLine(ConLife conLife, BigDecimal vatAmount) {
-        this.conLife = conLife;
+    public InvGoodsreceivedLine(BigDecimal vatAmount) {
         this.vatAmount = vatAmount;
     }
     public InvGoodsreceivedLine(AllStatus allStatus, ConCompany conCompany, ConLife conLife, ConUser conUserByCreatebyId, ConUser conUserByWritebyId, CrmUom crmUomByPurchaseuomId, CrmUom crmUomByReceiveduomId, InvGoodsreceived invGoodsreceived, InvStore invStore, Item item, Date recievedDate, String ref, String batchNo, String purchaseqty, BigDecimal purchaseuomQty, Integer purchaseunits, BigDecimal purchasePrice, Integer receivedqty, Integer receivedunits, BigDecimal receivedprice, BigDecimal receiveduomQty, BigDecimal utilizedQty, BigDecimal returnedQty, Date manufactureDate, Date expiryDate, BigDecimal vatAmount, Date createdt, Date writedt) {
@@ -128,7 +127,7 @@ public class InvGoodsreceivedLine  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="life", nullable=false)
+    @JoinColumn(name="life")
     public ConLife getConLife() {
         return this.conLife;
     }

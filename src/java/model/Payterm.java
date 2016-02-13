@@ -1,5 +1,5 @@
 package model;
-// Generated Feb 9, 2016 11:32:40 AM by Hibernate Tools 4.3.1
+// Generated Feb 16, 2016 7:40:44 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -43,10 +43,6 @@ public class Payterm  implements java.io.Serializable {
     public Payterm() {
     }
 
-	
-    public Payterm(ConLife conLife) {
-        this.conLife = conLife;
-    }
     public Payterm(ConCompany conCompany, ConLife conLife, ConUser conUserByCreatebyId, ConUser conUserByWritebyId, String paytermName, String comments, Date createdt, Date writedt, Set<PrcSuppliers> prcSupplierses, Set<CrmCustomer> crmCustomers) {
        this.conCompany = conCompany;
        this.conLife = conLife;
@@ -83,7 +79,7 @@ public class Payterm  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="life", nullable=false)
+    @JoinColumn(name="life")
     public ConLife getConLife() {
         return this.conLife;
     }

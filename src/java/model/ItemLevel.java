@@ -1,5 +1,5 @@
 package model;
-// Generated Feb 9, 2016 11:32:40 AM by Hibernate Tools 4.3.1
+// Generated Feb 16, 2016 7:40:44 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -42,10 +42,6 @@ public class ItemLevel  implements java.io.Serializable {
     public ItemLevel() {
     }
 
-	
-    public ItemLevel(ConLife conLife) {
-        this.conLife = conLife;
-    }
     public ItemLevel(ConCompany conCompany, ConLife conLife, ConUser conUserByCreatebyId, ConUser conUserByWritebyId, String levelCode, String levelName, Date createdt, Date writedt, Set<Item> items) {
        this.conCompany = conCompany;
        this.conLife = conLife;
@@ -81,7 +77,7 @@ public class ItemLevel  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="life", nullable=false)
+    @JoinColumn(name="life")
     public ConLife getConLife() {
         return this.conLife;
     }

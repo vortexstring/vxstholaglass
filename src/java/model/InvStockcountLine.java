@@ -1,5 +1,5 @@
 package model;
-// Generated Feb 9, 2016 11:32:40 AM by Hibernate Tools 4.3.1
+// Generated Feb 16, 2016 7:40:44 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -43,10 +43,6 @@ public class InvStockcountLine  implements java.io.Serializable {
     public InvStockcountLine() {
     }
 
-	
-    public InvStockcountLine(ConLife conLife) {
-        this.conLife = conLife;
-    }
     public InvStockcountLine(ConCompany conCompany, ConLife conLife, ConUser conUserByWritebyId, ConUser conUserByCreatebyId, InvStockcount invStockcount, InvStore invStore, Item item, Integer qty, String stockInd, Integer physicalCount, String comments, Date createdt, Date writedt) {
        this.conCompany = conCompany;
        this.conLife = conLife;
@@ -86,7 +82,7 @@ public class InvStockcountLine  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="life", nullable=false)
+    @JoinColumn(name="life")
     public ConLife getConLife() {
         return this.conLife;
     }

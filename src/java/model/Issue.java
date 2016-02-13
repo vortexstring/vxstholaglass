@@ -1,5 +1,5 @@
 package model;
-// Generated Feb 9, 2016 11:32:40 AM by Hibernate Tools 4.3.1
+// Generated Feb 16, 2016 7:40:44 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -50,8 +50,7 @@ public class Issue  implements java.io.Serializable {
     }
 
 	
-    public Issue(ConLife conLife, Date issueDate, String ref, int requisitionId, int storeId, int customerProjectId, int employeeId, String status, int itemId, int qty) {
-        this.conLife = conLife;
+    public Issue(Date issueDate, String ref, int requisitionId, int storeId, int customerProjectId, int employeeId, String status, int itemId, int qty) {
         this.issueDate = issueDate;
         this.ref = ref;
         this.requisitionId = requisitionId;
@@ -107,7 +106,7 @@ public class Issue  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="life", nullable=false)
+    @JoinColumn(name="life")
     public ConLife getConLife() {
         return this.conLife;
     }

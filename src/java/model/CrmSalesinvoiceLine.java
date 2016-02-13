@@ -1,5 +1,5 @@
 package model;
-// Generated Feb 9, 2016 11:32:40 AM by Hibernate Tools 4.3.1
+// Generated Feb 16, 2016 7:40:44 PM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -65,9 +65,7 @@ public class CrmSalesinvoiceLine  implements java.io.Serializable {
     }
 
 	
-    public CrmSalesinvoiceLine(ConCompany conCompany, CrmSalesinvoice crmSalesinvoice, int qty, BigDecimal discount, BigDecimal interest, BigDecimal percentDisc, BigDecimal percentInt, BigDecimal amount, BigDecimal vatableAmount, BigDecimal vatAmount, BigDecimal uomQty, int dimensionLengthNum, int dimensionLengthDenom, int dimensionWidthNum, int dimensionWidthDenom) {
-        this.conCompany = conCompany;
-        this.crmSalesinvoice = crmSalesinvoice;
+    public CrmSalesinvoiceLine(int qty, BigDecimal discount, BigDecimal interest, BigDecimal percentDisc, BigDecimal percentInt, BigDecimal amount, BigDecimal vatableAmount, BigDecimal vatAmount, BigDecimal uomQty, int dimensionLengthNum, int dimensionLengthDenom, int dimensionWidthNum, int dimensionWidthDenom) {
         this.qty = qty;
         this.discount = discount;
         this.interest = interest;
@@ -131,7 +129,7 @@ public class CrmSalesinvoiceLine  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="company_id", nullable=false)
+    @JoinColumn(name="company_id")
     public ConCompany getConCompany() {
         return this.conCompany;
     }
@@ -171,7 +169,7 @@ public class CrmSalesinvoiceLine  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="salesinvoice_id", nullable=false)
+    @JoinColumn(name="salesinvoice_id")
     public CrmSalesinvoice getCrmSalesinvoice() {
         return this.crmSalesinvoice;
     }

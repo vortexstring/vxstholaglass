@@ -1,5 +1,5 @@
 package model;
-// Generated Feb 9, 2016 11:32:40 AM by Hibernate Tools 4.3.1
+// Generated Feb 16, 2016 7:40:44 PM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -48,8 +48,7 @@ public class IssueLine  implements java.io.Serializable {
     }
 
 	
-    public IssueLine(ConLife conLife, int issueId, int itemId, int assetId, int storeId, int qtyRequested, int qtyIssued, BigDecimal price, String batchNo) {
-        this.conLife = conLife;
+    public IssueLine(int issueId, int itemId, int assetId, int storeId, int qtyRequested, int qtyIssued, BigDecimal price, String batchNo) {
         this.issueId = issueId;
         this.itemId = itemId;
         this.assetId = assetId;
@@ -101,7 +100,7 @@ public class IssueLine  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="life", nullable=false)
+    @JoinColumn(name="life")
     public ConLife getConLife() {
         return this.conLife;
     }

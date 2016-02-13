@@ -1,5 +1,5 @@
 package model;
-// Generated Feb 9, 2016 11:32:40 AM by Hibernate Tools 4.3.1
+// Generated Feb 16, 2016 7:40:44 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -47,8 +47,7 @@ public class ConObjectscaption  implements java.io.Serializable {
     }
 
 	
-    public ConObjectscaption(ConLife conLife, String islarge, boolean quicklink, String setpath, String reportpath, int objectCaptionSort, int available) {
-        this.conLife = conLife;
+    public ConObjectscaption(String islarge, boolean quicklink, String setpath, String reportpath, int objectCaptionSort, int available) {
         this.islarge = islarge;
         this.quicklink = quicklink;
         this.setpath = setpath;
@@ -108,7 +107,7 @@ public class ConObjectscaption  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="life", nullable=false)
+    @JoinColumn(name="life")
     public ConLife getConLife() {
         return this.conLife;
     }

@@ -29,36 +29,45 @@
                 skin: "dhx_web",
                 cells: [{id: "a", text: ""}]
             });
-
-
-
-
-
-//1.Setting  Layouts properties
+            //1.Setting  Layouts properties
             productsLayout.cells("a").hideHeader();
             productsLayout.cells("b").hideHeader();
             productsLayout.cells("a").setWidth(300);
 
-            var dhxTree = productsLayout.cells("a").attachTree();
+            var productsTreeToolbar = productsLayout.cells("a").attachToolbar({
+                icons_path: "./icons/toolbar/icons_terrace/",
+                xml: "./viewmodel/toolbar/com/com/crm/products_tree.jsp",
+                skin: "dhx_terrace"
+            });
 
-            dhxTree.setImagePath("./codebase/imgs/dhxtree_skyblue/");
-            dhxTree.setSkin('dhx_skyblue');
-            dhxTree.attachEvent("onXLS", function () {
+         var TreeloadPath = "./viewmodel/tree/com/com/products.jsp";
+         
+         
+       function attachTree(productsLayout,TreeloadPath){
+            var productsTree = productsLayout.cells("a").attachTree();
+            productsTree.setImagePath("./codebase/imgs/dhxtree_skyblue/");
+            productsTree.setSkin('dhx_skyblue');
+            productsTree.attachEvent("onXLS", function () {
                 productsLayout.cells("a").progressOn();
             });
 
-
-
-
-            dhxTree.loadJSON("./viewmodel/tree/com/com/products.jsp");
-            dhxTree.attachEvent("onXLE", function () {
+         
+            productsTree.loadJSON(TreeloadPath);
+            productsTree.attachEvent("onXLE", function () {
                 productsLayout.cells("a").progressOff();
             });
 
-            dhxTree.attachEvent("onClick", function (id) {
+            productsTree.attachEvent("onClick", function (id) {
+
+                // alert(id);
+
 
             });
-
+            return productsTree;
+            
+            }
+            
+             var productsTree = attachTree(productsLayout,TreeloadPath);
 
             /**********************END LAYOUT MANIPULATIONS**************************/
 
@@ -79,13 +88,13 @@
 
 
             /* C ***********SETTING OBJECTS PROPERTIES***********************************/
-            var loadPath = 'viewmodel/grid/com/com/crm/products.jsp';
+            var productsloadPath = 'viewmodel/grid/com/com/crm/products.jsp';
 
 
             productsGrid.setImagePath("config/mcsk_skin/imgs/");
 
             <%  ProductsVH PVH = new ProductsVH();
-              out.write(PVH.getGrid());
+                out.write(PVH.getGrid());
             %>
 
             productsGrid.init();
@@ -97,27 +106,42 @@
                 window.lastvisit = 'new';
             });
             productsToolbar.attachEvent("onClick", function (itemId) {
-                productsToolbarOnclick(itemId, productsGrid, loadPath);
+                productsToolbarOnclick(itemId, productsGrid, productsloadPath);
+            });
+
+            productsTreeToolbar.attachEvent("onClick", function (itemId) {
+
+                var parentId = productsTree.getSelectedItemId();
+                productsTreeToolbarOnclick(itemId, productsGrid, productsloadPath, parentId, productsTree, TreeloadPath,productsLayout)
+
             });
             productsGrid.attachEvent("onXLS", function () {
                 productsLayout.cells("b").progressOn();
             });
-            productsGrid.load(loadPath, 'json');
+            productsGrid.load(productsloadPath, 'json');
             productsGrid.attachEvent("onXLE", function () {
                 productsLayout.cells("b").progressOff();
             });
             // rId=-1;
             productsGrid.attachEvent("onRowSelect", function (rId, cInd) {
-                productsGridOnselect(productsGrid, rId, loadPath);
-             //   alert(rId);
+                productsGridOnselect(productsGrid, rId, productsloadPath);
+                //   alert(rId);
             });
-            function productsGridOnselect(productsGrid, rId, loadPath) {
+            
+            productsTree.attachEvent("onClick", function(id){
+
+             var pname = productsGrid.cells(id, 2).getValue();
+                productscreateWindow(id, pname, productsGrid, productsloadPath);
+            
+            });
+            
+            function productsGridOnselect(productsGrid, rId, productsloadPath) {
                 var pname = productsGrid.cells(rId, 2).getValue();
-                productscreateWindow(rId, pname, productsGrid, loadPath);
+                productscreateWindow(rId, pname, productsGrid, productsloadPath);
 
             }
 
-            function  productscreateWindow(rId, pname, productsGrid, loadPath) {
+            function  productscreateWindow(rId, pname, productsGrid, productsloadPath) {
 
                 var win = dhxWins.createWindow("Products " + rId, 50, 50, 1200, 600);
                 win.setText("<b>" + pname + "</b>");
@@ -134,22 +158,23 @@
                         ]
                     });
                     productsFormLayout.cells("b").hideArrow();
-                    var productsForm = createProductsform(productsFormLayout, productsGrid, rId);
+                
+                     var productsForm = createProductsform(productsFormLayout, productsGrid, rId,0);
 
 
                 });
 
-
-
             }
-            function createProductsform(productsFormLayout, productsGrid, rId) {
+            
+              
+            function createProductsform(productsFormLayout, productsGrid, rId,parentId) {
 
                 var productsForm = productsFormLayout.cells("a").attachForm();
                 productsForm.setSkin("dhx_web");
-
-                // alert("./viewmodel/form/com/com/crm/products.jsp?id=" + rId);
+                  
+              // alert("./viewmodel/form/com/com/crm/products.jsp?id=" + rId+"&parentid=" + parentId);
                 productsFormLayout.cells("a").progressOn();
-                productsForm.loadStruct("./viewmodel/form/com/com/crm/products.jsp?id=" + rId, function () {
+                productsForm.loadStruct("./viewmodel/form/com/com/crm/products.jsp?id=" + rId+"&parentid=" + parentId, function () {
                     productsFormLayout.cells("a").progressOff();
                     var value = productsForm.getItemValue("itemconfigurationid");
 
@@ -170,11 +195,6 @@
             }
 
             function createProductsConfigurationform(productsFormLayout, productsGrid, rId) {
-
-
-
-
-
                 var productsConfigurationform = productsFormLayout.cells("b").attachForm();
                 productsConfigurationform.setSkin("dhx_web");
 
@@ -198,6 +218,36 @@
             }
 
 
+
+            /**********************CREATING A WINDOW DEVELOPED FROM  CLICKING A TREE******************/
+
+            function  productsTreecreateWindow(rId, pname, productsGrid, productsloadPath, parentId, productsTree, TreeloadPath) {
+
+                var win = dhxWins.createWindow("Products " + rId, 50, 50, 1200, 600);
+                win.setText("<b>" + pname + "</b>");
+                var productsTabbar = win.attachTabbar();
+
+                productsTabbar.loadStruct("./viewmodel/tabbar/com/com/crm/products.jsp?id=" + rId, function () {
+
+             
+                            var productsFormLayout = productsTabbar.tabs("product").attachLayout({
+                        pattern: "2U",
+                        cells: [
+                            {id: "a", text: "Views", header: false},
+                            {id: "b", text: "Product configuration details"}
+                        ]
+                    });
+                    productsFormLayout.cells("b").hideArrow();
+                    
+                 
+                    var productsForm = createProductsform(productsFormLayout, productsGrid, rId,parentId);
+
+
+                });
+
+
+
+            }
 
 
         </script>

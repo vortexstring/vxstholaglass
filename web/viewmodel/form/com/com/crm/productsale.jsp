@@ -87,12 +87,12 @@ DTwritedt = DH.convertToUTC(Calendar.getInstance().getTime());
 createdt = DH.DatetoStrDate(DTcreatedt);
 writedt = DH.DatetimetoStrDatetime(DTwritedt);
 unitprice=new BigDecimal("0");
-minqty=new BigDecimal("0");
+minqty=new BigDecimal("1"); //Default Miqty of one
 maxqty=new BigDecimal("0");
 if(paramitemid!=null){itemid=paramitemid;}else{itemid=0;}
-uomid=0;
-currencyid=0;
-vatid=0;
+uomid=4; //Default Sqft fo glass
+currencyid=1; //Kenya shillings
+vatid=1; //16% Vat Inclusive
 Deffectivefrom = DH.convertToUTC(Calendar.getInstance().getTime());
 effectivefrom =DH.DatetoStrDate(Deffectivefrom);
 Deffectiveto = DH.convertToUTC(Calendar.getInstance().getTime());

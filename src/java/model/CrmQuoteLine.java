@@ -1,5 +1,5 @@
 package model;
-// Generated Feb 9, 2016 11:32:40 AM by Hibernate Tools 4.3.1
+// Generated Feb 16, 2016 7:40:44 PM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -65,10 +65,7 @@ public class CrmQuoteLine  implements java.io.Serializable {
     }
 
 	
-    public CrmQuoteLine(ConCompany conCompany, CrmQuote crmQuote, ItemSale itemSale, int qty, BigDecimal discount, BigDecimal interest, BigDecimal percentDisc, BigDecimal percentInt, BigDecimal amount, BigDecimal vatableAmount, BigDecimal vatAmount, BigDecimal uomQty, BigDecimal dimensionLengthNum, BigDecimal dimensionLengthDenom, BigDecimal dimensionWidthNum, BigDecimal dimensionWidthDenom) {
-        this.conCompany = conCompany;
-        this.crmQuote = crmQuote;
-        this.itemSale = itemSale;
+    public CrmQuoteLine(int qty, BigDecimal discount, BigDecimal interest, BigDecimal percentDisc, BigDecimal percentInt, BigDecimal amount, BigDecimal vatableAmount, BigDecimal vatAmount, BigDecimal uomQty, BigDecimal dimensionLengthNum, BigDecimal dimensionLengthDenom, BigDecimal dimensionWidthNum, BigDecimal dimensionWidthDenom) {
         this.qty = qty;
         this.discount = discount;
         this.interest = interest;
@@ -132,7 +129,7 @@ public class CrmQuoteLine  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="company_id", nullable=false)
+    @JoinColumn(name="company_id")
     public ConCompany getConCompany() {
         return this.conCompany;
     }
@@ -182,7 +179,7 @@ public class CrmQuoteLine  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="quote_id", nullable=false)
+    @JoinColumn(name="quote_id")
     public CrmQuote getCrmQuote() {
         return this.crmQuote;
     }
@@ -232,7 +229,7 @@ public class CrmQuoteLine  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="item_sale_id", nullable=false)
+    @JoinColumn(name="item_sale_id")
     public ItemSale getItemSale() {
         return this.itemSale;
     }

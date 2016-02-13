@@ -1,5 +1,5 @@
 package model;
-// Generated Feb 9, 2016 11:32:40 AM by Hibernate Tools 4.3.1
+// Generated Feb 16, 2016 7:40:44 PM by Hibernate Tools 4.3.1
 
 
 import java.math.BigDecimal;
@@ -44,10 +44,7 @@ public class ItemCustomPrices  implements java.io.Serializable {
     }
 
 	
-    public ItemCustomPrices(ConLife conLife, CrmCustomer crmCustomer, Item item, BigDecimal percentageDiscount, BigDecimal percentageInterest, Date effectiveFrom, Date effectiveTo) {
-        this.conLife = conLife;
-        this.crmCustomer = crmCustomer;
-        this.item = item;
+    public ItemCustomPrices(BigDecimal percentageDiscount, BigDecimal percentageInterest, Date effectiveFrom, Date effectiveTo) {
         this.percentageDiscount = percentageDiscount;
         this.percentageInterest = percentageInterest;
         this.effectiveFrom = effectiveFrom;
@@ -91,7 +88,7 @@ public class ItemCustomPrices  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="life", nullable=false)
+    @JoinColumn(name="life")
     public ConLife getConLife() {
         return this.conLife;
     }
@@ -121,7 +118,7 @@ public class ItemCustomPrices  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="customer_id", nullable=false)
+    @JoinColumn(name="customer_id")
     public CrmCustomer getCrmCustomer() {
         return this.crmCustomer;
     }
@@ -131,7 +128,7 @@ public class ItemCustomPrices  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="item_id", nullable=false)
+    @JoinColumn(name="item_id")
     public Item getItem() {
         return this.item;
     }

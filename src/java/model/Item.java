@@ -1,5 +1,5 @@
 package model;
-// Generated Feb 9, 2016 11:32:40 AM by Hibernate Tools 4.3.1
+// Generated Feb 16, 2016 7:40:44 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -53,11 +53,11 @@ public class Item  implements java.io.Serializable {
      private Set<PoDtl> poDtls = new HashSet<PoDtl>(0);
      private Set<CrmSalesorderLine> crmSalesorderLinesForItemId = new HashSet<CrmSalesorderLine>(0);
      private Set<CrmSalesorderLine> crmSalesorderLinesForItemServiceId = new HashSet<CrmSalesorderLine>(0);
+     private Set<Item> items = new HashSet<Item>(0);
      private Set<ItemDimensions> itemDimensionses = new HashSet<ItemDimensions>(0);
      private Set<MfcJobcardLine> mfcJobcardLinesForItemId = new HashSet<MfcJobcardLine>(0);
      private Set<MfcJobcardLine> mfcJobcardLinesForItemServiceId = new HashSet<MfcJobcardLine>(0);
      private Set<ItemPurchase> itemPurchases = new HashSet<ItemPurchase>(0);
-     private Set<Item> items = new HashSet<Item>(0);
      private Set<PrcPurchaseOrderLine> prcPurchaseOrderLines = new HashSet<PrcPurchaseOrderLine>(0);
      private Set<CrmSalesinvoiceLine> crmSalesinvoiceLinesForItemServiceId = new HashSet<CrmSalesinvoiceLine>(0);
      private Set<InvAdjustments> invAdjustmentses = new HashSet<InvAdjustments>(0);
@@ -72,11 +72,7 @@ public class Item  implements java.io.Serializable {
     public Item() {
     }
 
-	
-    public Item(ConLife conLife) {
-        this.conLife = conLife;
-    }
-    public Item(AllStatus allStatus, ConCompany conCompany, ConLife conLife, ConUser conUserByCreatebyId, ConUser conUserByWritebyId, Item item, ItemConfiguration itemConfiguration, ItemLevel itemLevel, String itemCode, String itemName, String itemIcon, Integer itemSort, Date createdt, Date writedt, Set<InvStockcountLine> invStockcountLines, Set<PurchaseRequisitionLine> purchaseRequisitionLines, Set<CrmPosLine> crmPosLinesForItemServiceId, Set<CrmSalesinvoiceLine> crmSalesinvoiceLinesForItemId, Set<CrmPosLine> crmPosLinesForItemId, Set<CrmQuoteLine> crmQuoteLinesForItemServiceId, Set<CrmQuoteLine> crmQuoteLinesForItemId, Set<PoDtl> poDtls, Set<CrmSalesorderLine> crmSalesorderLinesForItemId, Set<CrmSalesorderLine> crmSalesorderLinesForItemServiceId, Set<ItemDimensions> itemDimensionses, Set<MfcJobcardLine> mfcJobcardLinesForItemId, Set<MfcJobcardLine> mfcJobcardLinesForItemServiceId, Set<ItemPurchase> itemPurchases, Set<Item> items, Set<PrcPurchaseOrderLine> prcPurchaseOrderLines, Set<CrmSalesinvoiceLine> crmSalesinvoiceLinesForItemServiceId, Set<InvAdjustments> invAdjustmentses, Set<ItemColour> itemColours, Set<ItemSaleDimensions> itemSaleDimensionses, Set<InvGoodsreceivedLine> invGoodsreceivedLines, Set<CrmDeliveryLine> crmDeliveryLinesForItemId, Set<CrmDeliveryLine> crmDeliveryLinesForItemServiceId, Set<ItemSale> itemSales, Set<ItemCustomPrices> itemCustomPriceses) {
+    public Item(AllStatus allStatus, ConCompany conCompany, ConLife conLife, ConUser conUserByCreatebyId, ConUser conUserByWritebyId, Item item, ItemConfiguration itemConfiguration, ItemLevel itemLevel, String itemCode, String itemName, String itemIcon, Integer itemSort, Date createdt, Date writedt, Set<InvStockcountLine> invStockcountLines, Set<PurchaseRequisitionLine> purchaseRequisitionLines, Set<CrmPosLine> crmPosLinesForItemServiceId, Set<CrmSalesinvoiceLine> crmSalesinvoiceLinesForItemId, Set<CrmPosLine> crmPosLinesForItemId, Set<CrmQuoteLine> crmQuoteLinesForItemServiceId, Set<CrmQuoteLine> crmQuoteLinesForItemId, Set<PoDtl> poDtls, Set<CrmSalesorderLine> crmSalesorderLinesForItemId, Set<CrmSalesorderLine> crmSalesorderLinesForItemServiceId, Set<Item> items, Set<ItemDimensions> itemDimensionses, Set<MfcJobcardLine> mfcJobcardLinesForItemId, Set<MfcJobcardLine> mfcJobcardLinesForItemServiceId, Set<ItemPurchase> itemPurchases, Set<PrcPurchaseOrderLine> prcPurchaseOrderLines, Set<CrmSalesinvoiceLine> crmSalesinvoiceLinesForItemServiceId, Set<InvAdjustments> invAdjustmentses, Set<ItemColour> itemColours, Set<ItemSaleDimensions> itemSaleDimensionses, Set<InvGoodsreceivedLine> invGoodsreceivedLines, Set<CrmDeliveryLine> crmDeliveryLinesForItemId, Set<CrmDeliveryLine> crmDeliveryLinesForItemServiceId, Set<ItemSale> itemSales, Set<ItemCustomPrices> itemCustomPriceses) {
        this.allStatus = allStatus;
        this.conCompany = conCompany;
        this.conLife = conLife;
@@ -101,11 +97,11 @@ public class Item  implements java.io.Serializable {
        this.poDtls = poDtls;
        this.crmSalesorderLinesForItemId = crmSalesorderLinesForItemId;
        this.crmSalesorderLinesForItemServiceId = crmSalesorderLinesForItemServiceId;
+       this.items = items;
        this.itemDimensionses = itemDimensionses;
        this.mfcJobcardLinesForItemId = mfcJobcardLinesForItemId;
        this.mfcJobcardLinesForItemServiceId = mfcJobcardLinesForItemServiceId;
        this.itemPurchases = itemPurchases;
-       this.items = items;
        this.prcPurchaseOrderLines = prcPurchaseOrderLines;
        this.crmSalesinvoiceLinesForItemServiceId = crmSalesinvoiceLinesForItemServiceId;
        this.invAdjustmentses = invAdjustmentses;
@@ -151,7 +147,7 @@ public class Item  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="life", nullable=false)
+    @JoinColumn(name="life")
     public ConLife getConLife() {
         return this.conLife;
     }
@@ -361,6 +357,15 @@ public class Item  implements java.io.Serializable {
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="item")
+    public Set<Item> getItems() {
+        return this.items;
+    }
+    
+    public void setItems(Set<Item> items) {
+        this.items = items;
+    }
+
+@OneToMany(fetch=FetchType.LAZY, mappedBy="item")
     public Set<ItemDimensions> getItemDimensionses() {
         return this.itemDimensionses;
     }
@@ -394,15 +399,6 @@ public class Item  implements java.io.Serializable {
     
     public void setItemPurchases(Set<ItemPurchase> itemPurchases) {
         this.itemPurchases = itemPurchases;
-    }
-
-@OneToMany(fetch=FetchType.LAZY, mappedBy="item")
-    public Set<Item> getItems() {
-        return this.items;
-    }
-    
-    public void setItems(Set<Item> items) {
-        this.items = items;
     }
 
 @OneToMany(fetch=FetchType.LAZY, mappedBy="item")

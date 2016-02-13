@@ -1,5 +1,5 @@
 package model;
-// Generated Feb 9, 2016 11:32:40 AM by Hibernate Tools 4.3.1
+// Generated Feb 16, 2016 7:40:44 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -47,10 +47,6 @@ public class InvAdjustments  implements java.io.Serializable {
     public InvAdjustments() {
     }
 
-	
-    public InvAdjustments(ConLife conLife) {
-        this.conLife = conLife;
-    }
     public InvAdjustments(AllStatus allStatus, CommonCombo commonCombo, ConCompany conCompany, ConLife conLife, ConUser conUserByWritebyId, ConUser conUserByCreatebyId, CrmUom crmUom, InvStore invStore, Item item, String adjustmentCode, Integer qty, Integer units, String adjustmentType, String memo, Date adjustmentDate, Date createdt, Date writedt) {
        this.allStatus = allStatus;
        this.commonCombo = commonCombo;
@@ -114,7 +110,7 @@ public class InvAdjustments  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="life", nullable=false)
+    @JoinColumn(name="life")
     public ConLife getConLife() {
         return this.conLife;
     }

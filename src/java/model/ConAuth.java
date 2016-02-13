@@ -1,5 +1,5 @@
 package model;
-// Generated Feb 9, 2016 11:32:40 AM by Hibernate Tools 4.3.1
+// Generated Feb 16, 2016 7:40:44 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -44,9 +44,7 @@ public class ConAuth  implements java.io.Serializable {
     }
 
 	
-    public ConAuth(AllStatus allStatus, ConLife conLife, String username, String password) {
-        this.allStatus = allStatus;
-        this.conLife = conLife;
+    public ConAuth(String username, String password) {
         this.username = username;
         this.password = password;
     }
@@ -79,7 +77,7 @@ public class ConAuth  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="status_id", nullable=false)
+    @JoinColumn(name="status_id")
     public AllStatus getAllStatus() {
         return this.allStatus;
     }
@@ -99,7 +97,7 @@ public class ConAuth  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="life", nullable=false)
+    @JoinColumn(name="life")
     public ConLife getConLife() {
         return this.conLife;
     }

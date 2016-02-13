@@ -1,5 +1,5 @@
 package model;
-// Generated Feb 9, 2016 11:32:40 AM by Hibernate Tools 4.3.1
+// Generated Feb 16, 2016 7:40:44 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -55,8 +55,7 @@ public class PurchaseRequisition  implements java.io.Serializable {
     }
 
 	
-    public PurchaseRequisition(ConLife conLife, String requisitionCode, Date requisitionDate, int employeeId, String memo, String status, int taskId, int customerProjectId, int issueId, int reviewedby, Date reviewedate, int approvedby, Date approvedate, String rejectReason, int issued) {
-        this.conLife = conLife;
+    public PurchaseRequisition(String requisitionCode, Date requisitionDate, int employeeId, String memo, String status, int taskId, int customerProjectId, int issueId, int reviewedby, Date reviewedate, int approvedby, Date approvedate, String rejectReason, int issued) {
         this.requisitionCode = requisitionCode;
         this.requisitionDate = requisitionDate;
         this.employeeId = employeeId;
@@ -119,7 +118,7 @@ public class PurchaseRequisition  implements java.io.Serializable {
     }
 
 @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="life", nullable=false)
+    @JoinColumn(name="life")
     public ConLife getConLife() {
         return this.conLife;
     }

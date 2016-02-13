@@ -26,13 +26,14 @@ import vxsutil.VatHelper;
  * @author TBL
  */
 public class ProcessDimension {
+
     DateHelper DH = new DateHelper();
     List mydata;
     MapperHelper MH = new MapperHelper();
     UnitsHelper UH = new UnitsHelper();
     PriceHelper PH = new PriceHelper();
     VatHelper VH = new VatHelper();
-
+    String myquery;
     Integer duomid;
     BigDecimal BGdimensionlength = new BigDecimal(0);
     BigDecimal BGdimensionlengthnum = new BigDecimal(0);
@@ -51,20 +52,20 @@ public class ProcessDimension {
     BigDecimal TGBGdimensionwidthdenom = new BigDecimal(0);
 
     BigDecimal BGpercentdisc = new BigDecimal(0);
-        BigDecimal BGpercentint = new BigDecimal(0);
-        
-      BigDecimal  vatrate = new BigDecimal(0);
+    BigDecimal BGpercentint = new BigDecimal(0);
 
+    BigDecimal vatrate = new BigDecimal(0);
 
-        BigDecimal UomQty = new BigDecimal(0);
+    BigDecimal UomQty = new BigDecimal(0);
     BigDecimal Amount = new BigDecimal(0);
     BigDecimal LengthQuotient = new BigDecimal(0);
     BigDecimal widthQuotient = new BigDecimal(0);
-    
+
     private BigDecimal BGqty;
     private Integer i;
     private Date DTnow;
     private String strNow;
+    private String strNowshort;
 
     public Map<String, Object> calculate(Map dimen) {
 
@@ -102,10 +103,10 @@ public class ProcessDimension {
         String createbyid = MH.cleanMap(dimen, "createbyid", "");
         String writebyid = MH.cleanMap(dimen, "writebyid", "");
         String id = MH.cleanMap(dimen, "id", "-1");
-        
+
         dimen.replace("uomqty", UomQty);
-        dimen.put("pricecount", "0");   
-        
+        dimen.put("pricecount", "0");
+
         dimen = getArea(dimen);
 
         return dimen;
@@ -127,8 +128,8 @@ public class ProcessDimension {
         BGdimensionwidthdenom = new BigDecimal(MH.cleanMap(dimen, "dimensionwidthdenom", ""));
 
         //get the percentage discount
-         BGpercentdisc = new BigDecimal(MH.cleanMap(dimen, "percentdisc", ""));
-         BGpercentint = new BigDecimal(MH.cleanMap(dimen, "percentint", ""));
+        BGpercentdisc = new BigDecimal(MH.cleanMap(dimen, "percentdisc", ""));
+        BGpercentint = new BigDecimal(MH.cleanMap(dimen, "percentint", ""));
 
         String dimensionuomid = MH.cleanMap(dimen, "dimensionuomid", "");
         if (!dimensionuomid.isEmpty()) {
@@ -200,7 +201,7 @@ public class ProcessDimension {
 
         UomQty = TGBGdimensionlength.add(LengthQuotient, MathContext.UNLIMITED).multiply(TGBGdimensionwidth.add(widthQuotient, MathContext.UNLIMITED));
         dimen.replace("uomqty", UomQty);
-   
+
         dimen = setProductSaleDetails(dimen);
         return dimen;
 
@@ -208,66 +209,109 @@ public class ProcessDimension {
 
     private Map setProductSaleDetails(Map productsale) {
 
-         BigDecimal UnitPrice = new BigDecimal(0);
-         BigDecimal Qty = new BigDecimal(productsale.get("qty").toString());
-         BigDecimal UomQty = new BigDecimal(productsale.get("uomqty").toString());
-        //   FROM ItemSale WHERE item.itemId=959 and crmUom.uomId=4 and  999999>=minQty and 99999<=maxQty and  effectiveFrom>='2013-02-03 ' and  effectiveTo<='2016-02-06'
-        DataLoader ME = new DataLoader();
-        String myquery = " FROM ItemSale WHERE item.itemId=959 and crmUom.uomId=4 and minQty<= 999999 and maxQty>=99999 and  effectiveFrom<='2016-02-06' and  effectiveTo>='2016-02-06'";
-        mydata = ME.getData(myquery);
-        
-        
+        BigDecimal UnitPrice = new BigDecimal(0);
+        BigDecimal Qty = new BigDecimal(productsale.get("qty").toString());
+        BigDecimal UomQty = new BigDecimal(productsale.get("uomqty").toString());
+        Integer itemqtycountignoremax;
+        itemqtycountignoremax = 0;
+
+        Integer itemid = Integer.parseInt(MH.cleanMap(productsale, "itemid", "0"));
+        Integer uomid = Integer.parseInt(MH.cleanMap(productsale, "uomid", "0"));
+
         DTnow = DH.convertToUTC(Calendar.getInstance().getTime());
         strNow = DH.DatetimetoStrDatetime(DTnow);
-        
-        
+        strNowshort = DH.DatetoStrDate(DTnow);
+        DataLoader ME = new DataLoader();
+        //Check if the maximum qty  has a zero o by pass the maximum qty
+        BigDecimal myzero = new BigDecimal("0");
+        String sql = "select count(itemsale0_.item_sale_id) as col_0_0_ from vxsee.item_sale itemsale0_ where itemsale0_.item_id=" + itemid + " and itemsale0_.min_qty<=" + UomQty + " and itemsale0_.max_qty=" + myzero;
+        itemqtycountignoremax = ME.getCount(sql);
+
+        if (itemqtycountignoremax > 0) {
+            myquery = " FROM ItemSale WHERE item.itemId=" + itemid + " and crmUom.uomId=" + uomid + " and minQty<=" + UomQty + " and effectiveFrom<='" + strNowshort + "' and  effectiveTo>='" + strNowshort + "'";
+
+        } else {
+            myquery = " FROM ItemSale WHERE item.itemId=" + itemid + " and crmUom.uomId=" + uomid + " and minQty<=" + UomQty + " and maxQty>=" + UomQty + " and  effectiveFrom<='" + strNowshort + "' and  effectiveTo>='" + strNowshort + "'";
+
+        }
+
+        mydata = ME.getData(myquery);
+        if (mydata.size() == 0) {
+            productsale.put("error_msg", "There are no existig prices  for the product with the entered sales parameter");
+
+            //CHECK IF TE PRODUCT EXISTS
+            Integer itemcount = ME.getCount("select count(itemsale0_.item_sale_id) as col_0_0_ from vxsee.item_sale itemsale0_ where itemsale0_.item_id=" + itemid);
+
+            if (itemcount == 0) {
+                productsale.replace("error_msg", "There are no existig prices  for the product");
+            } else {
+
+                //CHECK THE QUANTITY,IF THEY EXIST IN THE PRICE EXIST
+                Integer itemqtycount = ME.getCount("select count(itemsale0_.item_sale_id) as col_0_0_ from vxsee.item_sale itemsale0_ where itemsale0_.item_id=" + itemid + " and itemsale0_.min_qty<=" + UomQty + " and itemsale0_.max_qty>=" + UomQty);
+
+                if (itemqtycount == 0) {
+                    productsale.replace("error_msg", "The Sale Units Quantity is out of range!");
+                } else {
+                    //CHECK THE DATES ,IF THEY EXIST IN THE PRICE EXIST                 
+                    Integer itemdatecount = ME.getCount("select count(itemsale0_.item_sale_id) as col_0_0_ from vxsee.item_sale itemsale0_ where itemsale0_.item_id=" + itemid + " and itemsale0_.effective_from<='" + strNowshort + "' and itemsale0_.effective_to>='" + strNowshort + "'");
+
+                    if (itemdatecount == 0) {
+                        productsale.replace("error_msg", "There prices validity dates are out of range!");
+                    }
+
+                }
+            }
+
+        }
+
+        if (mydata.size() > 1) {
+            productsale.replace("error_msg", "There are " + mydata.size() + "duplicate and conflicting  prices for the product");
+        }
+
         i = 0;
         if (!mydata.isEmpty()) {
             for (Iterator iterator = mydata.iterator(); iterator.hasNext();) {
                 ItemSale OBJ = (ItemSale) iterator.next();
-                
-                productsale.replace("itemsaleid",OBJ.getItemSaleId().toString());
-                productsale.replace("uomid",OBJ.getCrmUom().getUomId().toString()); 
-                productsale.replace("price",OBJ.getUnitPrice().toString()); 
-                productsale.replace("percentdisc",OBJ.getUnitPrice()); 
-                productsale.replace("percentint",OBJ.getUnitPrice().toString()); 
-              
-                productsale.replace("vatamount",OBJ.getUnitPrice().toString());
-                productsale.replace("qdate",strNow); 
-                productsale.put("vatrate",OBJ.getFinVat().getVatRate().toString());
-               UnitPrice=OBJ.getUnitPrice();
-                   i++;
+
+                productsale.replace("itemsaleid", OBJ.getItemSaleId().toString());
+                productsale.replace("uomid", OBJ.getCrmUom().getUomId().toString());
+                productsale.replace("price", OBJ.getUnitPrice().toString());
+                productsale.replace("percentdisc", OBJ.getUnitPrice());
+                productsale.replace("percentint", OBJ.getUnitPrice().toString());
+                productsale.replace("vatid", OBJ.getFinVat().getVatId());
+                productsale.replace("vatamount", OBJ.getUnitPrice().toString());
+                productsale.replace("qdate", strNow);
+                productsale.put("vatrate", OBJ.getFinVat().getVatRate().toString());
+                UnitPrice = OBJ.getUnitPrice();
+                i++;
             }
             ME.closeListSession();
         }
-        
-        
-         Amount=UnitPrice.multiply(Qty).multiply(UomQty);
-         
-         BigDecimal DiscountAmt=PH.calculateDiscount(Amount, BGpercentdisc);
-         productsale.replace("percentdisc",BGpercentdisc.toString());
-         productsale.replace("discount",DiscountAmt.toString());
-         
-          BigDecimal InterestAmt=PH.calculateInterest(Amount, BGpercentint);
-         productsale.replace("percentint",BGpercentint.toString());
-         productsale.replace("interest",InterestAmt.toString());
-        
-         vatrate= new BigDecimal(productsale.get("vatrate").toString());
-          BigDecimal VatableAmt=VH.calculateVatableAmt(Amount, InterestAmt, vatrate);
 
-         productsale.replace("vatableamount",VatableAmt.toString()); 
-           
-          BigDecimal VatAmt=VH.calculateVatAmt(Amount, InterestAmt, vatrate);
-          productsale.replace("vatamount",VatAmt.toString()); 
+        Amount = UnitPrice.multiply(Qty).multiply(UomQty);
+
+        BigDecimal DiscountAmt = PH.calculateDiscount(Amount, BGpercentdisc);
+        productsale.replace("percentdisc", BGpercentdisc.toString());
+        productsale.replace("discount", DiscountAmt.toString());
+
+        BigDecimal InterestAmt = PH.calculateInterest(Amount, BGpercentint);
+        productsale.replace("percentint", BGpercentint.toString());
+        productsale.replace("interest", InterestAmt.toString());
+
+        vatrate = new BigDecimal(productsale.get("vatrate").toString());
+        BigDecimal VatableAmt = VH.calculateVatableAmt(Amount, InterestAmt, vatrate);
+
+        productsale.replace("vatableamount", VatableAmt.toString());
+
+        BigDecimal VatAmt = VH.calculateVatAmt(Amount, InterestAmt, vatrate);
+        productsale.replace("vatamount", VatAmt.toString());
 
         //deduct the discount and add the interesr
         BigDecimal NetAmount = Amount.add(InterestAmt).subtract(DiscountAmt);
-                 
-        productsale.replace("pricecount",i.toString());            
-        productsale.replace("amount",NetAmount.toString()); 
-        
-        
-        
+
+        productsale.replace("pricecount", mydata.size());
+        productsale.replace("amount", NetAmount.toString());
+
         return productsale;
     }
 
