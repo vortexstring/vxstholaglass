@@ -1,0 +1,1 @@
+ALTER TABLE `item_colour` ADD `life` INT(50) NOT NULL DEFAULT '1' , ADD `createby_id` INT(50) NULL , ADD `createdt` DATETIME NULL , ADD `writeby_id` INT(50) NULL , ADD `writedt` DATETIME NULL , ADD `company_id` INT(50) NULL  ; 

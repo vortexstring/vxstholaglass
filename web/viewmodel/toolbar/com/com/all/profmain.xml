@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toolbar> 
+<item id="new" type="button" img="new.gif" text="Add" imgdis="new_dis.gif"/> 
+<item id="refresh" type="button" img="refresh.jpg" text="Reload" imgdis=""/> 
+
+  
+<item id="sep4" type="separator"/> 
+</toolbar>
