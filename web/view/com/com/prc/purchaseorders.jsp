@@ -146,7 +146,7 @@
             }
             function  itempurchasecreateWindow(purchaseOrderId, pname, purchaseorderslineGrid) {
 
-                var win = dhxWins.createWindow("Suppliers " + purchaseOrderId, 600, 140, 450, 450);
+                var win = dhxWins.createWindow("Suppliers " + purchaseOrderId, 400, 140, 900, 450);
                 win.attachEvent("onClose", function (win) {
                     win.hide();
                     purchaseorderslineGrid.clearAll();
@@ -156,11 +156,55 @@
                 win.setText("<b>" + pname + "</b>");
 
                 var itemPurchaseorderFormLayout = win.attachLayout({
-                    pattern: "1C",
+                    pattern: "2U",
                     cells: [
-                        {id: "a", text: "Views", header: false, height: 300},
+                        {id: "a", text: "FORM", header: false, width: 300},
+                        {id: "b", text: "GRID", header: false},
                     ]
                 });
+
+
+//PRODUCTS CATEGORY SERVICE
+                itemPurchaseorderFormLayout.cells("a").setWidth(300);
+                itemPurchaseorderFormLayout.cells("b").hideArrow();
+                //   winLayout.cells("a").setText("Product Service");
+                itemPurchaseorderFormLayout.cells("b").setText("Select a Product Service from the left");
+                /* var serviceGrid = winLayout.cells("a").attachGrid("dhx_web");
+                 serviceGrid.setImagePath("config/mcsk_skin/imgs/");
+                 serviceGrid.setColTypes("ro,ro");
+                 serviceGrid.setHeader("#,Product Service");
+                 serviceGrid.setColAlign("left,left");
+                 serviceGrid.setInitWidthsP("10,*");
+                 serviceGrid.attachHeader(",#text_filter");
+                 serviceGrid.setColSorting("int,str");
+                 serviceGrid.init();*/
+                var dhxTree = itemPurchaseorderFormLayout.cells("a").attachTree();
+
+                dhxTree.setImagePath("./codebase/imgs/dhxtree_skyblue/");
+                dhxTree.setSkin('dhx_skyblue');
+                dhxTree.attachEvent("onXLS", function () {
+                    itemPurchaseorderFormLayout.cells("a").progressOn();
+                });
+
+
+
+
+                dhxTree.loadJSON("./viewmodel/tree/com/com/products.jsp");
+                dhxTree.attachEvent("onXLE", function () {
+                    itemPurchaseorderFormLayout.cells("a").progressOff();
+                });
+
+                dhxTree.attachEvent("onClick", function (id) {
+                    //alert(id);
+                    //string getItemText(mixed id);
+
+                    alert(id);
+                    dhxTreeOnclick(itemPurchaseorderFormLayout, dhxTree,id);
+
+                });
+
+
+
 
                 var itemPurchaseorderForm = createItemPurchaseform(itemPurchaseorderFormLayout, purchaseorderslineGrid, purchaseOrderId);
 
@@ -180,9 +224,9 @@
 
                 return supplierPurchaseorderForm;
             }
-            function createItemPurchaseform(itemPurchaseorderFormLayout, purchaseorderslineGrid, purchaseOrderId) {
+          function createItemPurchaseform(itemPurchaseorderFormLayout, purchaseorderslineGrid, purchaseOrderId) {
 
-                var itemPurchaseorderForm = itemPurchaseorderFormLayout.cells("a").attachForm();
+                var itemPurchaseorderForm = itemPurchaseorderFormLayout.cells("b").attachForm();
                 // alert("./viewmodel/form/com/com/sec/credentials.jsp?id="+rId);
                 itemPurchaseorderFormLayout.cells("a").progressOn();
                 itemPurchaseorderForm.loadStruct("./viewmodel/form/com/com/prc/itempurchaseorder.jsp?id=" + purchaseOrderId, function () {

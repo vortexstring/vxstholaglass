@@ -8,30 +8,56 @@
 <%@include  file="../../../../controller/mainController.jsp" %>
 <%@include  file="../../../../view/helper.jsp" %>
 <script>
+
+    function purchaseordersToolbarOnclick(itemId, purchaseordersGrid) {
+        switch (itemId) {
+            case 'new':
+
+                window.lastvisit = "new";
+                // Grid.clearSelection();
+                purchaseOrderId = -1;
+                pname = "Add New LPO";
+                alert(purchaseOrderId);
+                //itempurchasecreateWindow(purchaseOrderId, pname, purchaseorderslineGrid);
+                purchaseorderscreateWindow(purchaseOrderId, pname, purchaseordersGrid, loadPath);
+
+                break;
+            case 'refresh':
+                purchaseordersGrid.clearAll();
+                purchaseordersGrid.load('viewmodel/grid/com/com/prc/purchaseorders.jsp', 'json');
+                break;
+            case 'pdf':
+                ExportPdf(purchaseordersGrid);
+                break;
+            case 'excel':
+                ExportExcel(purchaseordersGrid);
+                break;
+        }
+    }
     ///*  function suppliersToolbarOnclick(itemId, suppliersLayout, suppliersGrid) 
-     function purchaseorderslineToolbarOnclick(itemId, purchaseorderslineGrid,purchaseOrderId){
-     switch (itemId) {
-     case 'new':
-     
-     window.lastvisit = "new";
-     // Grid.clearSelection();
-     //purchaseOrderId = -1;
-     pname = "Add Item";
-     alert(purchaseOrderId);
-     itempurchasecreateWindow(purchaseOrderId, pname, purchaseorderslineGrid);
-     break;
-     case 'refresh':
-     purchaseorderslineGrid.clearAll();
-     purchaseorderslineGrid.load('viewmodel/grid/com/com/prc/supplierspurchaseorders.jsp', 'json');
-     break;
-     case 'pdf':
-     ExportPdf(purchaseorderslineGrid);
-     break;
-     case 'excel':
-     ExportExcel(purchaseorderslineGrid);
-     break;
-     }
-     }
+    function purchaseorderslineToolbarOnclick(itemId, purchaseorderslineGrid, purchaseOrderId) {
+        switch (itemId) {
+            case 'new':
+
+                window.lastvisit = "new";
+                // Grid.clearSelection();
+                //purchaseOrderId = -1;
+                pname = "Add Item";
+                alert(purchaseOrderId);
+                itempurchasecreateWindow(purchaseOrderId, pname, purchaseorderslineGrid);
+                break;
+            case 'refresh':
+                purchaseorderslineGrid.clearAll();
+                purchaseorderslineGrid.load('viewmodel/grid/com/com/prc/supplierspurchaseorders.jsp', 'json');
+                break;
+            case 'pdf':
+                ExportPdf(purchaseorderslineGrid);
+                break;
+            case 'excel':
+                ExportExcel(purchaseorderslineGrid);
+                break;
+        }
+    }
 
     function  supplierPurchaseorderFormOnclick(id, supplierPurchaseorderForm, purchaseordersGrid, purchaseorderslineLayout) {
 
@@ -78,7 +104,7 @@
                 break;
 
             default:
-               // setsuppliersSync();
+                // setsuppliersSync();
                 break;
         }
     }

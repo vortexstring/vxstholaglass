@@ -53,11 +53,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>VORTEXSTRING|ERP</title>
-       <link rel="stylesheet" href="codebase/login/bootstrap.min.css">
-        <link rel="stylesheet" href="codebase/login/font-awesome.min.css">
-        <link rel="stylesheet" href="codebase/login/fonts.googleapis.com.css">
-        <link rel="stylesheet" href="codebase/login/ace.min.css">
-        <link rel="stylesheet" href="codebase/login/ace-rtl.min.css">
+        
+     
+     
         
     </head>
     <script>

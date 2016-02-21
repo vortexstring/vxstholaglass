@@ -1,4 +1,5 @@
 
+<%@page import="viewmodelhelpers.EmptyGridVH"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="java.io.*,java.util.*,java.sql.*"%>
@@ -17,6 +18,8 @@
     purchaseOrderId = request.getParameter("purchaseOrderId");
     pp = Integer.parseInt(purchaseOrderId);
 // Order by purchaseorderLineId ASC
+     EmptyGridVH  EGVH=new EmptyGridVH();
+
     DataLoader ME = new DataLoader();
     StringBuilder myquery = new StringBuilder("FROM PrcPurchaseOrderLine  WHERE life=1  AND purchaseorder_id=" + pp );
 
@@ -43,9 +46,12 @@
             i++;
         }
         out.println("]}");
+            ME.closeListSession();
+
+    }else{
+       out.println(EGVH.displayEmptyGrid(10));      
     }
 
-    ME.closeListSession();
    // out.println("Factory details:" + ME.getFactoryDetails());
 
 
