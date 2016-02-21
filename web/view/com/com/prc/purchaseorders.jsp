@@ -61,9 +61,9 @@
             purchaseordersToolbar.attachEvent("onClick", function (itemId) {
                 purchaseordersToolbarOnclick(itemId, purchaseordersGrid);
             });
-            //            salesorderGrid.attachEvent("onXLS", function () {
-            //                salesorderLayout.cells("a").progressOn();
-            //            });
+            purchaseordersGrid.attachEvent("onXLS", function () {
+                purchaseordersLayout.cells("a").progressOn();
+            });
             purchaseordersGrid.load(loadPath, "json");
             purchaseordersGrid.attachEvent("onXLE", function () {
                 purchaseordersLayout.cells("a").progressOff();
@@ -105,7 +105,7 @@
                     xml: "./viewmodel/toolbar/com/com/all/basic.jsp",
                     skin: "dhx_terrace"
                 });
-              //  var loadPath1 = 'viewmodel/grid/com/com/prc/supplierspurchaseorders.jsp?purchaseOrderId=' + purchaseOrderId;
+                //  var loadPath1 = 'viewmodel/grid/com/com/prc/supplierspurchaseorders.jsp?purchaseOrderId=' + purchaseOrderId;
                 alert(purchaseOrderId);
                 purchaseorderslineGrid = purchaseorderslineLayout.cells("b").attachGrid();
                 purchaseorderslineGrid.setColTypes("ro,ro,ro");
@@ -135,11 +135,11 @@
                 purchaseorderslineGrid.attachEvent("onRowSelect", function (rId, cInd) {
                     purchaseorderslineGridOnselect(purchaseorderslineGrid, rId);
                 });
-                
+
                 var supplierPurchaseorderForm = createPurchaseorderform(purchaseorderslineLayout, purchaseordersGrid, purchaseOrderId);
 
             }
-            
+
             function purchaseorderslineGridOnselect(mygrid, rId) {
                 var pname = mygrid.cells(rId, 1).getValue();
                 itempurchasecreateWindow(rId, pname, mygrid);
