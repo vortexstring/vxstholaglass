@@ -53,11 +53,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>VORTEXSTRING|ERP</title>
-<!--        <link rel="stylesheet" href="codebase/login/bootstrap.min.css">
+       <link rel="stylesheet" href="codebase/login/bootstrap.min.css">
         <link rel="stylesheet" href="codebase/login/font-awesome.min.css">
         <link rel="stylesheet" href="codebase/login/fonts.googleapis.com.css">
         <link rel="stylesheet" href="codebase/login/ace.min.css">
-        <link rel="stylesheet" href="codebase/login/ace-rtl.min.css">-->
+        <link rel="stylesheet" href="codebase/login/ace-rtl.min.css">
         
     </head>
     <script>
@@ -99,7 +99,7 @@
             </div>
             <!-- start: LOGIN BOX -->
             <div class="box-login">
-                <h3>Sign in to your account</h3>
+                <h3>Sign in to your account to Login </h3>
                 <p>
                     Please enter your userkey and username and password to log in.
                 </p>
