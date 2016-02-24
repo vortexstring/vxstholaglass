@@ -108,7 +108,7 @@
             /**************************END OF OBJECTS EVENTS********************************/
             function  productsalecreateWindow(rId, pname, productsaleGrid, productsaleloadpath,itemid) {
        
-                var win = dhxWins.createWindow("Customers " + rId, 370, 70, 800, 585);
+                var win = dhxWins.createWindow("Productsale " + rId, 400, 70, 500, 450);
                 win.attachEvent("onClose", function (win) {
                     win.hide();
                    // customersGrid.clearAll();

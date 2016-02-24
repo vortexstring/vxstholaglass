@@ -17,6 +17,17 @@
     </head>
     <body>
         <script>
+var searchString=document.location.href;
+      /*  searchString=searchString.subString(1);
+        
+        var nvpairs=searchString.split("&");
+        for(i=0; i<nvpairs.length; i++)
+            {
+                var nvpairs=nvPairs[i].split("=");
+                var name=nvpairs[0];
+                var value=nvpairs[1];
+            }*/
+      var itemid=<% out.write(request.getParameter("id"));  %>
 
 
             /* A **************************LAYOUT MANIPULATIONS***********************/
@@ -67,13 +78,13 @@
             /***************END OF OBJECT PROPERTIES**************************************/
 
             /* D *************************OBJECTS EVENTS***********************************/
-            var loadPath = 'viewmodel/grid/com/com/crm/productpurchase.jsp';
+            var loadPath = 'viewmodel/grid/com/com/crm/productpurchase.jsp?id='+itemid;
             productpurchaseToolbar.attachEvent("onXLE", function () {
                 window.lastvisit = 'new';
             });
             productpurchaseToolbar.attachEvent("onClick", function (itemId) {
            
-               productpurchaseToolbarOnclick(itemId, productpurchaseGrid, loadPath);
+               productpurchaseToolbarOnclick(itemId, productpurchaseGrid, loadPath,itemid);
             });
             productpurchaseGrid.attachEvent("onXLS", function () {
                 productpurchaseLayout.cells("a").progressOn();
@@ -84,18 +95,18 @@
             });
             rId = -1;
             productpurchaseGrid.attachEvent("onRowSelect", function (rId, cInd) {
-            productpurchaseGridOnselect(productpurchaseGrid, rId, loadPath);
+            productpurchaseGridOnselect(productpurchaseGrid, rId, loadPath,itemid);
 
             });
-            function productpurchaseGridOnselect(productpurchaseGrid, rId, loadPath) {
+            function productpurchaseGridOnselect(productpurchaseGrid, rId, loadPath,itemid) {
                 var pname = productpurchaseGrid.cells(rId, 1).getValue();
-                productpurchasecreateWindow(rId, pname, productpurchaseGrid, loadPath);
+                productpurchasecreateWindow(rId, pname, productpurchaseGrid, loadPath,itemid);
 
             }
             /**************************END OF OBJECTS EVENTS********************************/
-            function  productpurchasecreateWindow(rId, pname, productpurchaseGrid, loadPath) {
+            function  productpurchasecreateWindow(rId, pname, productpurchaseGrid, loadPath,itemid) {
        
-                var win = dhxWins.createWindow("Customers " + rId, 370, 70, 800, 585);
+                var win = dhxWins.createWindow("Productpurchase " + rId, 400, 70, 500, 450);
                 win.attachEvent("onClose", function (win) {
                     win.hide();
                    // customersGrid.clearAll();
@@ -112,16 +123,17 @@
                         {id: "a", text: "Views", header: false},
                     ]
                 });
-                var productpurchaseForm = createProductpurchaseform(productpurchaseFormLayout, productpurchaseGrid, rId);
+                var productpurchaseForm = createProductpurchaseform(productpurchaseFormLayout, productpurchaseGrid, rId,itemid);
             }
-            function createProductpurchaseform(productpurchaseFormLayout, productpurchaseGrid, rId) {
+            function createProductpurchaseform(productpurchaseFormLayout, productpurchaseGrid, rId,itemid) {
 
                 var productpurchaseForm = productpurchaseFormLayout.cells("a").attachForm();
 
 
                 productpurchaseFormLayout.cells("a").progressOn();
-                
-                productpurchaseForm.loadStruct("./viewmodel/form/com/com/crm/productpurchase.jsp?id=" + rId, function () {
+                       //        alert("./viewmodel/form/com/com/crm/productpurchase.jsp?id=" + rId+"&itemid="+itemid);
+
+                productpurchaseForm.loadStruct("./viewmodel/form/com/com/crm/productpurchase.jsp?id=" + rId+"&itemid="+itemid, function () {
 
                     productpurchaseFormLayout.cells("a").progressOff();
                 });

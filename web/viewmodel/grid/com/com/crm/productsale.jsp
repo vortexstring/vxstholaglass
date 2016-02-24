@@ -15,7 +15,7 @@
     String myq, namedetails,saledetails,vatdetails,strid;
     List mydata;
     Integer i,id;
-     ;
+   //  ;
 %>
 
 <%
@@ -24,7 +24,7 @@
     ProductsVH  PVH=new ProductsVH();
      EmptyGridVH  EGVH=new EmptyGridVH();
     DataLoader ME = new DataLoader();
-    StringBuilder myquery = new StringBuilder("FROM ItemSale where life=1 AND item.itemId="+id);
+    StringBuilder myquery = new StringBuilder("FROM ItemSale where life=1 AND item_sale_id>0 AND item.itemId="+id);
 
 
     mydata = ME.getData(myquery.toString());

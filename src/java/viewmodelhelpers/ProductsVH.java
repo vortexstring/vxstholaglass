@@ -52,7 +52,7 @@ public class ProductsVH {
 
         try {
             DataLoader ME = new DataLoader();
-            mydata = ME.getData("FROM ItemLevel WHERE itemLevelId!=0 ORDER BY itemLevelId DESC");
+            mydata = ME.getData("FROM ItemLevel WHERE itemLevelId!=0 AND life=1 ORDER BY itemLevelId DESC");
             Integer colSize = mydata.size();
             if (!mydata.isEmpty()) {
                 i = 1;
@@ -64,7 +64,7 @@ public class ProductsVH {
                     headers = headers + "," + OBJ.getLevelName();
                     colAlign = colAlign + ",left";
                     InitWidthsP = InitWidthsP + "," + 85 / colSize;
-                    filterHeader = filterHeader + ",#combo_filter";
+                    filterHeader = filterHeader + ",#text_filter";
                     gridSorting = gridSorting + ",str";
                     ColTypes = ColTypes + ",ro";
                     i++;
