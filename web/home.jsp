@@ -109,7 +109,7 @@
 
                 var dhxTabbar1 = myLayout.cells("c").attachTabbar();
                 dhxTabbar1.setSkin("dhx_terrace");
-               events(dhxTabbar1);
+                events(dhxTabbar1);
                 var caption = 'HOME';
                 var id = caption;
                 dhxTabbar1.addTab(id, caption, ((caption.length * 5) + 70), null, true, false);

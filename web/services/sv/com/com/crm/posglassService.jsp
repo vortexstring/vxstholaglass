@@ -50,7 +50,7 @@ myfeedback = new Gson().toJson(crudCrmPosLine.cud("d", jsonData));
 out.print(myfeedback);
 }else if(actiontype.equals("-10")) {
     
- myfeedback = new Gson().toJson(PD.calculate(jsonData)); 
+ myfeedback = new Gson().toJson(PD.calculateService(jsonData)); 
 out.print(myfeedback);
    
 }

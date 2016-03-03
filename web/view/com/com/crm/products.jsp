@@ -39,8 +39,8 @@
                 xml: "./viewmodel/toolbar/com/com/crm/products_tree.jsp",
                 skin: "dhx_terrace"
             });
-
-         var TreeloadPath = "./viewmodel/tree/com/com/products.jsp";
+  
+         var TreeloadPath = "./viewmodel/tree/com/com/products.jsp?itemlevel=-1&itemconfiguration=-1";
          
          
        function attachTree(productsLayout,TreeloadPath){

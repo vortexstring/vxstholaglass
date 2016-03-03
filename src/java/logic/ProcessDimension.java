@@ -35,6 +35,12 @@ public class ProcessDimension {
     VatHelper VH = new VatHelper();
     String myquery;
     Integer duomid;
+  
+    
+    BigDecimal  totalLength;
+    BigDecimal totalWidth;   
+    BigDecimal totalPolishLength;
+    BigDecimal polishuomqty;
     BigDecimal BGdimensionlength = new BigDecimal(0);
     BigDecimal BGdimensionlengthnum = new BigDecimal(0);
     BigDecimal BGdimensionlengthdenom = new BigDecimal(0);
@@ -212,6 +218,10 @@ public class ProcessDimension {
         BigDecimal UnitPrice = new BigDecimal(0);
         BigDecimal Qty = new BigDecimal(productsale.get("qty").toString());
         BigDecimal UomQty = new BigDecimal(productsale.get("uomqty").toString());
+        
+        BigDecimal totalQty=Qty.multiply(UomQty);
+        productsale.replace("uomqty", totalQty);
+        
         Integer itemqtycountignoremax;
         itemqtycountignoremax = 0;
 
@@ -224,21 +234,27 @@ public class ProcessDimension {
         DataLoader ME = new DataLoader();
         //Check if the maximum qty  has a zero o by pass the maximum qty
         BigDecimal myzero = new BigDecimal("0");
-        String sql = "select count(itemsale0_.item_sale_id) as col_0_0_ from vxsee.item_sale itemsale0_ where itemsale0_.item_id=" + itemid + " and itemsale0_.min_qty<=" + UomQty + " and itemsale0_.max_qty=" + myzero;
+        String sql = "select count(itemsale0_.item_sale_id) as col_0_0_ from vxsee.item_sale itemsale0_ where itemsale0_.item_id=" + itemid + " and itemsale0_.min_qty<=" + totalQty + " and itemsale0_.max_qty=" + myzero;
         itemqtycountignoremax = ME.getCount(sql);
 
         if (itemqtycountignoremax > 0) {
-            myquery = " FROM ItemSale WHERE item.itemId=" + itemid + " and crmUom.uomId=" + uomid + " and minQty<=" + UomQty + " and effectiveFrom<='" + strNowshort + "' and  effectiveTo>='" + strNowshort + "'";
+            myquery = " FROM ItemSale WHERE item.itemId=" + itemid + " and crmUom.uomId=" + uomid + " and minQty<=" + totalQty + " and effectiveFrom<='" + strNowshort + "' and  effectiveTo>='" + strNowshort + "'";
 
         } else {
-            myquery = " FROM ItemSale WHERE item.itemId=" + itemid + " and crmUom.uomId=" + uomid + " and minQty<=" + UomQty + " and maxQty>=" + UomQty + " and  effectiveFrom<='" + strNowshort + "' and  effectiveTo>='" + strNowshort + "'";
+            myquery = " FROM ItemSale WHERE item.itemId=" + itemid + " and crmUom.uomId=" + uomid + " and minQty<=" + totalQty + " and maxQty>=" + totalQty + " and  effectiveFrom<='" + strNowshort + "' and  effectiveTo>='" + strNowshort + "'";
 
         }
 
         mydata = ME.getData(myquery);
         if (mydata.size() == 0) {
-            productsale.put("error_msg", "There are no existig prices  for the product with the entered sales parameter");
 
+            if (itemqtycountignoremax > 0) {
+                productsale.put("error_msg", "The Min and Max sale quantity are out of range for this product");
+            } else {
+
+                productsale.put("error_msg", "The Min and Max sale quantity are out of range for this product,set Max Quantity to zero (0) to ignore upper limit.");
+
+            }
             //CHECK IF TE PRODUCT EXISTS
             Integer itemcount = ME.getCount("select count(itemsale0_.item_sale_id) as col_0_0_ from vxsee.item_sale itemsale0_ where itemsale0_.item_id=" + itemid);
 
@@ -247,19 +263,14 @@ public class ProcessDimension {
             } else {
 
                 //CHECK THE QUANTITY,IF THEY EXIST IN THE PRICE EXIST
-                Integer itemqtycount = ME.getCount("select count(itemsale0_.item_sale_id) as col_0_0_ from vxsee.item_sale itemsale0_ where itemsale0_.item_id=" + itemid + " and itemsale0_.min_qty<=" + UomQty + " and itemsale0_.max_qty>=" + UomQty);
+                Integer itemqtycount = ME.getCount("select count(itemsale0_.item_sale_id) as col_0_0_ from vxsee.item_sale itemsale0_ where itemsale0_.item_id=" + itemid + " and itemsale0_.min_qty<=" + totalQty + " and itemsale0_.max_qty>=" + totalQty);
+                //CHECK THE DATES ,IF THEY EXIST IN THE PRICE EXIST                 
+                Integer itemdatecount = ME.getCount("select count(itemsale0_.item_sale_id) as col_0_0_ from vxsee.item_sale itemsale0_ where itemsale0_.item_id=" + itemid + " and itemsale0_.effective_from<='" + strNowshort + "' and itemsale0_.effective_to>='" + strNowshort + "'");
 
-                if (itemqtycount == 0) {
-                    productsale.replace("error_msg", "The Sale Units Quantity is out of range!");
-                } else {
-                    //CHECK THE DATES ,IF THEY EXIST IN THE PRICE EXIST                 
-                    Integer itemdatecount = ME.getCount("select count(itemsale0_.item_sale_id) as col_0_0_ from vxsee.item_sale itemsale0_ where itemsale0_.item_id=" + itemid + " and itemsale0_.effective_from<='" + strNowshort + "' and itemsale0_.effective_to>='" + strNowshort + "'");
-
-                    if (itemdatecount == 0) {
-                        productsale.replace("error_msg", "There prices validity dates are out of range!");
-                    }
-
+                if (itemdatecount == 0) {
+                    productsale.replace("error_msg", "There prices validity dates are out of range!");
                 }
+
             }
 
         }
@@ -276,8 +287,8 @@ public class ProcessDimension {
                 productsale.replace("itemsaleid", OBJ.getItemSaleId().toString());
                 productsale.replace("uomid", OBJ.getCrmUom().getUomId().toString());
                 productsale.replace("price", OBJ.getUnitPrice().toString());
-                productsale.replace("percentdisc", OBJ.getUnitPrice());
-                productsale.replace("percentint", OBJ.getUnitPrice().toString());
+              // productsale.replace("percentdisc", OBJ.getUnitPrice());
+              // productsale.replace("percentint", OBJ.getUnitPrice().toString());
                 productsale.replace("vatid", OBJ.getFinVat().getVatId());
                 productsale.replace("vatamount", OBJ.getUnitPrice().toString());
                 productsale.replace("qdate", strNow);
@@ -288,8 +299,11 @@ public class ProcessDimension {
             ME.closeListSession();
         }
 
-        Amount = UnitPrice.multiply(Qty).multiply(UomQty);
-
+          //get the percentage discount
+        BGpercentdisc = new BigDecimal(MH.cleanMap(productsale, "percentdisc", ""));
+        BGpercentint = new BigDecimal(MH.cleanMap(productsale, "percentint", ""));
+        Amount = UnitPrice.multiply(totalQty);
+      
         BigDecimal DiscountAmt = PH.calculateDiscount(Amount, BGpercentdisc);
         productsale.replace("percentdisc", BGpercentdisc.toString());
         productsale.replace("discount", DiscountAmt.toString());
@@ -314,5 +328,121 @@ public class ProcessDimension {
 
         return productsale;
     }
+    
+    /********************CALCULATE THE SERVICES DATA*********************/
+    
+        public Map<String, Object> calculateService(Map dimen) {
+
+        String dimensionuomid = MH.cleanMap(dimen, "dimensionuomid", "");
+        String dimensionlength = MH.cleanMap(dimen, "dimensionlength", "");
+        String dimensionlengthnum = MH.cleanMap(dimen, "dimensionlengthnum", "");
+        String dimensionlengthdenom = MH.cleanMap(dimen, "dimensionlengthdenom", "");
+        String qty = MH.cleanMap(dimen, "qty", "");
+        String dimensionwidth = MH.cleanMap(dimen, "dimensionwidth", "");
+        String dimensionwidthnum = MH.cleanMap(dimen, "dimensionwidthnum", "");
+        String dimensionwidthdenom = MH.cleanMap(dimen, "dimensionwidthdenom", "");
+        String uomid = MH.cleanMap(dimen, "uomid", "");
+        String percentdisc = MH.cleanMap(dimen, "percentdisc", "");
+        String amount = MH.cleanMap(dimen, "amount", "");
+        String vatamount = MH.cleanMap(dimen, "vatamount", "");
+        String qdate = MH.cleanMap(dimen, "qdate", "");
+        String price = MH.cleanMap(dimen, "price", "");
+        String percentint = MH.cleanMap(dimen, "percentint", "");
+        String vatableamount = MH.cleanMap(dimen, "vatableamount", "");
+        String uomqty = MH.cleanMap(dimen, "uomqty", "");
+        String memo = MH.cleanMap(dimen, "memo", "");
+        String discount = MH.cleanMap(dimen, "discount", "");
+        String interest = MH.cleanMap(dimen, "interest", "");
+        String dimensionthickness = MH.cleanMap(dimen, "dimensionthickness", "");
+        String dimensionthicknessnum = MH.cleanMap(dimen, "dimensionthicknessnum", "");
+        String dimensionthicknessdenom = MH.cleanMap(dimen, "dimensionthicknessdenom", "");
+        String ralno = MH.cleanMap(dimen, "ralno", "");
+        String status = MH.cleanMap(dimen, "status", "");
+        String posid = MH.cleanMap(dimen, "posid", "");
+        String itemid = MH.cleanMap(dimen, "itemid", "");
+        String itemserviceid = MH.cleanMap(dimen, "itemserviceid", "");
+        String itemsaleid = MH.cleanMap(dimen, "itemsaleid", "");
+        String createdt = MH.cleanMap(dimen, "createdt", "");
+        String writedt = MH.cleanMap(dimen, "writedt", "");
+        String createbyid = MH.cleanMap(dimen, "createbyid", "");
+        String writebyid = MH.cleanMap(dimen, "writebyid", "");
+        String id = MH.cleanMap(dimen, "id", "-1");
+        
+        
+         String toplength = MH.cleanMap(dimen, "toplength", "");
+        String bottomlength = MH.cleanMap(dimen, "bottomlength", "");
+        String leftwidth = MH.cleanMap(dimen, "leftwidth", "");
+        String rightwidth = MH.cleanMap(dimen, "rightwidth", "");
+
+      
+       
+          //Get the length dimensios
+        BGqty = new BigDecimal(MH.cleanMap(dimen, "qty", ""));
+        
+        BGdimensionlength = new BigDecimal(MH.cleanMap(dimen, "dimensionlength", ""));
+        BGdimensionlengthnum = new BigDecimal(MH.cleanMap(dimen, "dimensionlengthnum", ""));
+        BGdimensionlengthdenom = new BigDecimal(MH.cleanMap(dimen, "dimensionlengthdenom", ""));
+
+        BigDecimal sumLength=BGdimensionlengthnum.divide(BGdimensionlengthdenom, 5, RoundingMode.UP).add(BGdimensionlength);
+        //Get the width dimensions
+        BGdimensionwidth = new BigDecimal(MH.cleanMap(dimen, "dimensionwidth", ""));
+        BGdimensionwidthnum = new BigDecimal(MH.cleanMap(dimen, "dimensionwidthnum", ""));
+        BGdimensionwidthdenom = new BigDecimal(MH.cleanMap(dimen, "dimensionwidthdenom", ""));
+       
+         BigDecimal sumWidth=BGdimensionwidthnum.divide(BGdimensionwidthdenom, 5, RoundingMode.UP).add(BGdimensionwidth);
+      
+       if(toplength.equals("1") && bottomlength.equals("1")){
+         totalLength=sumLength.add(sumLength);
+           
+       }else {          
+            if(!toplength.equals("1") && !bottomlength.equals("1")){
+              
+            totalLength=new BigDecimal("0"); }else{
+                
+               totalLength=sumLength;
+            }
+        }
+       
+       
+         if(leftwidth.equals("1") && rightwidth.equals("1")){
+         totalWidth=sumWidth.add(sumWidth);
+           
+       }else {          
+            if(!leftwidth.equals("1") && !rightwidth.equals("1")){
+              totalWidth=new BigDecimal("0"); }else{
+                
+              totalWidth=sumWidth;
+            }
+        }
+
+     totalPolishLength=totalLength.add(totalWidth);
+      dimen.replace("uomid","3");
+     // 1 mm to Feet
+     if(dimensionuomid.equals("1")){  polishuomqty=UH.mmTofeet(totalPolishLength); }
+     // 2 cm  to Feet
+     if(dimensionuomid.equals("2")){  polishuomqty=UH.cmTofeet(totalPolishLength); }
+     // 3 feet to Feet
+     if(dimensionuomid.equals("3")){ polishuomqty=UH.feetTofeet(totalPolishLength); }
+       //7 Metres to feet
+     if(dimensionuomid.equals("7")){ polishuomqty=UH.mtrsTofeet(totalPolishLength); }
+         
+     
+      dimen.replace("uomqty",polishuomqty);  
+      dimen = setProductSaleDetails(dimen);
+      
+      
+      
+        return dimen;
+
+    }
+
+    
+    
+    
+    
+    
+    
+    
+    
 
 }

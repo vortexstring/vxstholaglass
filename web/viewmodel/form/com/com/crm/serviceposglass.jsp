@@ -197,7 +197,7 @@
 
 {type: "input", name:"vatableamount",label:"Vatable amount", value:"<% out.print(vatableamount); %>" ,readonly:"true", validate:"ValidateLength"},
 {type: "input", name:"uomqty",label:"UOM qty", value:"<% out.print(uomqty); %>" ,readonly:"true", validate:"ValidateLength"},
-{type: "input", name:"memo",label:"Memo", value: "<% out.print(memo); %>",rows:2 , validate:"ValidateLength"},
+{type: "input", name:"memo",label:"Memo", value: "<% out.print(memo); %>",rows:3 , validate:"ValidateLength"},
 ]},
 
 {type: "hidden", name:"dimensionthickness",label:"Dimensionthickness", value:"<% out.print(dimensionthickness); %>" , validate:"ValidateLength"},
@@ -206,7 +206,7 @@
 {type: "hidden", name:"ralno",label:"Ralno", value:"<% out.print(ralno); %>" , validate:"ValidateLength"},
 {type: "hidden", name:"posid",label:"Posid", value:"<% out.print(posid); %>" , validate:"ValidateLength"},
 
-{type: "hidden", name:"itemid",label:"Itemid", value:"<% out.print(itemid); %>" , validate:"ValidateLength"},
+{type: "input", name:"itemid",label:"Itemid", value:"<% out.print(itemid); %>" , validate:"ValidateLength"},
 {type: "hidden", name:"itemserviceid",label:"Itemserviceid", value:"<% out.print(itemserviceid); %>" , validate:"ValidateLength"},
 {type: "hidden", name:"createdt", id:"createdt", value:"<% out.print(createdt);%>"},
 {type: "hidden", name:"writedt", id:"writedt", value:"<% out.print(writedt);%>"},

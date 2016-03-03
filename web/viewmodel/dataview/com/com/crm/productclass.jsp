@@ -19,7 +19,7 @@
 <%
 
     DataLoader ME = new DataLoader();
-    StringBuilder myquery = new StringBuilder("FROM Item where item_level_id=1 ORDER BY item_sort ASC");
+    StringBuilder myquery = new StringBuilder("FROM Item where item_level_id=1  and conLife.lifeId!=2 ORDER BY item_sort ASC");
 
     mydata = ME.getData(myquery.toString());
 
