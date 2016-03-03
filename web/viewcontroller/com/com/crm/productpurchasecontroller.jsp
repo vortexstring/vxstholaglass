@@ -8,7 +8,7 @@
 <%@include  file="../../../../controller/mainController.jsp" %>
 <%@include  file="../../../../view/helper.jsp" %>
 <script>
-  function productpurchaseToolbarOnclick(itemId, productpurchaseGrid,loadPath) {
+  function productpurchaseToolbarOnclick(itemId, productpurchaseGrid,loadPath,itemid) {
         switch (itemId) {
             case 'new':
 
@@ -16,7 +16,7 @@
                 // Grid.clearSelection();
                 rId = -1;
                 pname = "Add Purchase Details";
-                productpurchasecreateWindow(rId, pname, productpurchaseGrid, loadPath);
+                productpurchasecreateWindow(rId, pname, productpurchaseGrid, loadPath,itemid);
                 break;
             case 'refresh':
                 productpurchaseGrid.clearAll();
@@ -45,7 +45,7 @@
                     var mydata = "" + JSON.stringify(values);
                     var param = "data=" + mydata + "&actiontype=0";
                     var path = "./services/sv/com/com/crm/productpurchase.jsp";
-alert(param);
+//alert(param);
                     winsaver(param, path, "productpurchase", productpurchaseGrid, true);
                 } else {
                     dhtmlx.message({

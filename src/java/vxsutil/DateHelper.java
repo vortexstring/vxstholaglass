@@ -116,4 +116,18 @@ public Date convertToUTC(Date dateObj){
             return null;
         }
 }
+public Date convertToUTCTwo(Date dateObj){
+      try {
+
+            Calendar c = Calendar.getInstance();
+            c.setTime(dateObj); // Now use the date passed
+            c.add(Calendar.YEAR,2);
+            c.add(Calendar.HOUR,-UTCOffsetHours); // Removing the offset hours
+            return c.getTime();
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+            return null;
+        }
+}
 }

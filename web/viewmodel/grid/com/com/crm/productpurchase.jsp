@@ -12,18 +12,20 @@
 
 
 <%!
-    String myq, namedetails,saledetails,vatdetails;
+    String myq, namedetails,saledetails,vatdetails,strid;
     List mydata;
-    Integer i;
-     ;
+    Integer i,id;
+   //  ;
 %>
 
 <%
+    strid = request.getParameter("id");
+    id=Integer.parseInt(strid);
     ProductsVH  PVH=new ProductsVH();
          EmptyGridVH  EGVH=new EmptyGridVH();
 
     DataLoader ME = new DataLoader();
-    StringBuilder myquery = new StringBuilder("FROM ItemPurchase where life=1 ");
+    StringBuilder myquery = new StringBuilder("FROM ItemPurchase where life=1 AND item_purchase_id>0 AND item.itemId="+id);
 
 
     mydata = ME.getData(myquery.toString());
